@@ -24,9 +24,13 @@ namespace ChessIA
 
         private void chessboard_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
         {
-            if ((e.Column % 2 == 0))
+            if ((e.Column + e.Row ) % 2 == 0 )
             {
-
+                e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.CellBounds);
+            }
+            else
+            {
+                e.Graphics.FillRectangle(Brushes.Brown, e.CellBounds);
             }
         }
     }
