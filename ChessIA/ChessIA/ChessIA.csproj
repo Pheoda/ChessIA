@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ChessIA</RootNamespace>
     <AssemblyName>ChessIA</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,14 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bishop.cs" />
+    <Compile Include="Cell.cs" />
+    <Compile Include="Chessboard.cs" />
     <Compile Include="ChessIA.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChessIA.Designer.cs">
       <DependentUpon>ChessIA.cs</DependentUpon>
     </Compile>
+    <Compile Include="Knight.cs" />
+    <Compile Include="Piece.cs" />
+    <Compile Include="Pawn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="King.cs" />
+    <Compile Include="Rook.cs" />
     <EmbeddedResource Include="ChessIA.resx">
       <DependentUpon>ChessIA.cs</DependentUpon>
     </EmbeddedResource>
@@ -65,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
