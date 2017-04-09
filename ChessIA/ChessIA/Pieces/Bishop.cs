@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace ChessIA
 {
-    class Pawn : Piece
+    class Bishop : Piece
     {
-        private bool isFirstMove;
-
-        public Pawn(bool black) : base(black)
+		public Bishop(bool black) : base(black)
         {
-            isFirstMove = true;
+
+        }
+
+        public override void move()
+        {
+            throw new NotImplementedException();
         }
     }
 }

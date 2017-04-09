@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace ChessIA
 {
-    class Bishop : Piece
+    class Rook : Piece
     {
-		public Bishop(bool black) : base(black)
+        public Rook(bool black) : base(black)
         {
 
+        }
+
+        public override void move()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,5 +12,10 @@ namespace ChessIA
         {
 
         }
+
+        public override void move()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
