@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pieces\Bishop.cs" />
-    <Compile Include="Cell.cs" />
     <Compile Include="Chessboard.cs" />
     <Compile Include="ChessIA.cs">
       <SubType>Form</SubType>
@@ -59,6 +58,7 @@
     <Compile Include="Pieces\Knight.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="Pieces\Pawn.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pieces\King.cs" />

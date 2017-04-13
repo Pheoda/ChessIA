@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ChessIA
 {
-    class Cell
+    class Rook : Piece
     {
+		public Rook(bool black) : base(black)
+        {
 
+        }
     }
 }

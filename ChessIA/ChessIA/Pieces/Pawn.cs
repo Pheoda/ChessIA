@@ -15,7 +15,7 @@ namespace ChessIA
             isFirstMove = true;
         }
 
-        public override void move()
+		public override bool canMove(Position endPos)
         {
             throw new NotImplementedException();
         }

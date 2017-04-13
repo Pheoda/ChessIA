@@ -12,9 +12,14 @@ namespace ChessIA
 {
     public partial class ChessIA : Form
     {
+		private Chessboard board;
+
         public ChessIA()
         {
             InitializeComponent();
+
+			board = new Chessboard();
+
         }
 
         private void ChessIA_Load(object sender, EventArgs e)
@@ -33,5 +38,10 @@ namespace ChessIA
                 e.Graphics.FillRectangle(Brushes.Brown, e.CellBounds);
             }
         }
+
+		private void chessboard_Click(object sender, EventArgs e)
+		{
+			board.keyboardInput();
+		}
     }
 }
