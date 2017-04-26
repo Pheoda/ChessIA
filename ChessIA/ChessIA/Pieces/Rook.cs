@@ -13,9 +13,10 @@ namespace ChessIA
 
         }
 
-		public override bool canMove(Position endPos)
+		public override bool canMove(Position endPos, Piece[] pieces)
         {
-            throw new NotImplementedException();
+			// Une tour peut bouger suivant un unique axe
+			return this.position.getX() == endPos.getX() || this.position.getY() == endPos.getY();
         }
     }
 }

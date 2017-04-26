@@ -71,6 +71,11 @@
 			// inputY1
 			// 
 			this.inputY1.Location = new System.Drawing.Point(138, 83);
+			this.inputY1.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
 			this.inputY1.Name = "inputY1";
 			this.inputY1.Size = new System.Drawing.Size(120, 20);
 			this.inputY1.TabIndex = 1;
@@ -78,6 +83,11 @@
 			// inputX1
 			// 
 			this.inputX1.Location = new System.Drawing.Point(12, 83);
+			this.inputX1.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
 			this.inputX1.Name = "inputX1";
 			this.inputX1.Size = new System.Drawing.Size(120, 20);
 			this.inputX1.TabIndex = 2;
@@ -85,6 +95,11 @@
 			// inputX2
 			// 
 			this.inputX2.Location = new System.Drawing.Point(12, 140);
+			this.inputX2.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
 			this.inputX2.Name = "inputX2";
 			this.inputX2.Size = new System.Drawing.Size(120, 20);
 			this.inputX2.TabIndex = 3;
@@ -92,6 +107,11 @@
 			// inputY2
 			// 
 			this.inputY2.Location = new System.Drawing.Point(138, 140);
+			this.inputY2.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
 			this.inputY2.Name = "inputY2";
 			this.inputY2.Size = new System.Drawing.Size(120, 20);
 			this.inputY2.TabIndex = 4;

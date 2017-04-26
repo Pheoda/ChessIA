@@ -17,9 +17,9 @@ namespace ChessIA
 		}
 
 		// Bouge la piece a la position pos en effectuant les tests necessaires
-        public bool move(Position pos)
+        public bool move(Position pos, Piece[] pieces)
 		{
-			if(canMove(pos))
+			if(canMove(pos, pieces))
 			{
 				return true;
 			}
@@ -31,11 +31,15 @@ namespace ChessIA
 		}
 		
 		// Est-ce que la piece peut se deplacer vers endPos ?
-		public abstract bool canMove(Position endPos);
+		public abstract bool canMove(Position endPos, Piece[] pieces);
 
 		public bool getIsBlack()
 		{
 			return isBlack;
+		}
+		public Position getPos()
+		{
+			return position;
 		}
     }
 }

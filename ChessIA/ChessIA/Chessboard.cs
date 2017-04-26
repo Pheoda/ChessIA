@@ -45,7 +45,7 @@ namespace ChessIA
 			int result;
 			do
 			{
-				while (!Int32.TryParse(Console.ReadLine(), out result)) ; // Tant qu'on a pas recuperer un entier
+				while (!Int32.TryParse(Console.ReadLine(), out result)) ; // Tant qu'on a pas recupere un entier
 			}while(result < min || result > max);
 
 			return result;
@@ -54,15 +54,15 @@ namespace ChessIA
 		// Bouge la piece si possible suivant la saisie clavier precedente
 		public bool movePiece(Position startPos, Position endPos)
 		{
-			return true;
+			foreach(Piece piece in pieces)
+			{
+				if (piece.getPos() == startPos)
+				{
+					return piece.move(endPos, this.pieces);
+				}
+			}
+			Console.WriteLine("Piece non trouvee");
+			return false;
 		}
-
-		// Est-ce que la piece p peut se deplacer a la position newPos ?
-		public bool checkDeplacement(Piece p, Position newPos)
-		{
-			return true;
-		}
-
-
     }
 }
