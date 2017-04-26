@@ -39,9 +39,31 @@ namespace ChessIA
             }
         }
 
-		private void chessboard_Click(object sender, EventArgs e)
+		private void deplacementButton_Click(object sender, EventArgs e)
 		{
-			board.keyboardInput();
+			int x1, y1, x2, y2;
+
+			// Check non vide
+			/*if(inputX1.Value == String.Empty || inputY1.Value == String.Empty 
+				|| inputX2.Value == String.Empty || inputY2.Value == String.Empty)
+				return;*/
+
+			// Piece de depart
+			x1 = (int)inputX1.Value;
+			y1 = (int)inputY1.Value;
+
+			// Position d'arrivee
+			x2 = (int)inputX2.Value;
+			y2 = (int)inputY2.Value;
+
+			Console.WriteLine("Entree : {0}/{1} et {2}/{3}", x1, y1, x2, y2);
+
+			if (board.movePiece(new Position(x1, y1), new Position(x2, y2)))
+			{
+				board.changeTurn();
+				blackRadioButton.Checked = board.getTurn();
+				whiteRadioButton.Checked = !board.getTurn();
+			}
 		}
     }
 }

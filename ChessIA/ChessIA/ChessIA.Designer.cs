@@ -35,6 +35,10 @@
 			this.inputY2 = new System.Windows.Forms.NumericUpDown();
 			this.labelPosition1 = new System.Windows.Forms.Label();
 			this.labelPosition2 = new System.Windows.Forms.Label();
+			this.deplacementButton = new System.Windows.Forms.Button();
+			this.whiteRadioButton = new System.Windows.Forms.RadioButton();
+			this.blackRadioButton = new System.Windows.Forms.RadioButton();
+			this.labelTurn = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.inputY1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputX1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputX2)).BeginInit();
@@ -66,7 +70,6 @@
 			this.chessboard.Size = new System.Drawing.Size(650, 650);
 			this.chessboard.TabIndex = 0;
 			this.chessboard.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.chessboard_CellPaint);
-			this.chessboard.Click += new System.EventHandler(this.chessboard_Click);
 			// 
 			// inputY1
 			// 
@@ -134,11 +137,56 @@
 			this.labelPosition2.TabIndex = 6;
 			this.labelPosition2.Text = "Case d\'arrivée";
 			// 
+			// deplacementButton
+			// 
+			this.deplacementButton.Location = new System.Drawing.Point(12, 194);
+			this.deplacementButton.Name = "deplacementButton";
+			this.deplacementButton.Size = new System.Drawing.Size(246, 67);
+			this.deplacementButton.TabIndex = 7;
+			this.deplacementButton.Text = "Valider déplacement";
+			this.deplacementButton.UseVisualStyleBackColor = true;
+			this.deplacementButton.Click += new System.EventHandler(this.deplacementButton_Click);
+			// 
+			// whiteRadioButton
+			// 
+			this.whiteRadioButton.AutoSize = true;
+			this.whiteRadioButton.Location = new System.Drawing.Point(28, 311);
+			this.whiteRadioButton.Name = "whiteRadioButton";
+			this.whiteRadioButton.Size = new System.Drawing.Size(52, 17);
+			this.whiteRadioButton.TabIndex = 8;
+			this.whiteRadioButton.TabStop = true;
+			this.whiteRadioButton.Text = "Blanc";
+			this.whiteRadioButton.UseVisualStyleBackColor = true;
+			// 
+			// blackRadioButton
+			// 
+			this.blackRadioButton.AutoSize = true;
+			this.blackRadioButton.Location = new System.Drawing.Point(104, 311);
+			this.blackRadioButton.Name = "blackRadioButton";
+			this.blackRadioButton.Size = new System.Drawing.Size(53, 17);
+			this.blackRadioButton.TabIndex = 9;
+			this.blackRadioButton.TabStop = true;
+			this.blackRadioButton.Text = "White";
+			this.blackRadioButton.UseVisualStyleBackColor = true;
+			// 
+			// labelTurn
+			// 
+			this.labelTurn.AutoSize = true;
+			this.labelTurn.Location = new System.Drawing.Point(12, 295);
+			this.labelTurn.Name = "labelTurn";
+			this.labelTurn.Size = new System.Drawing.Size(32, 13);
+			this.labelTurn.TabIndex = 10;
+			this.labelTurn.Text = "Tour ";
+			// 
 			// ChessIA
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1284, 714);
+			this.Controls.Add(this.labelTurn);
+			this.Controls.Add(this.blackRadioButton);
+			this.Controls.Add(this.whiteRadioButton);
+			this.Controls.Add(this.deplacementButton);
 			this.Controls.Add(this.labelPosition2);
 			this.Controls.Add(this.labelPosition1);
 			this.Controls.Add(this.inputY2);
@@ -167,6 +215,10 @@
 		private System.Windows.Forms.NumericUpDown inputY2;
 		private System.Windows.Forms.Label labelPosition1;
 		private System.Windows.Forms.Label labelPosition2;
+		private System.Windows.Forms.Button deplacementButton;
+		private System.Windows.Forms.RadioButton whiteRadioButton;
+		private System.Windows.Forms.RadioButton blackRadioButton;
+		private System.Windows.Forms.Label labelTurn;
     }
 }
 

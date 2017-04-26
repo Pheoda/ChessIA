@@ -8,7 +8,8 @@ namespace ChessIA
 {
     class Bishop : Piece
     {
-		public Bishop(bool black) : base(black)
+		public Bishop(Position position, bool black, String pathImage)
+			: base(position, black, pathImage)
         {
 
         }

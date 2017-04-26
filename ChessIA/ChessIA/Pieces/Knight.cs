@@ -8,7 +8,8 @@ namespace ChessIA
 {
     class Knight : Piece
     {
-		public Knight(bool black) : base(black)
+		public Knight(Position position, bool black, String pathImage)
+			: base(position, black, pathImage)
         {
 
         }

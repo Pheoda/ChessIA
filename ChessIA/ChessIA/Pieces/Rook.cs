@@ -8,7 +8,8 @@ namespace ChessIA
 {
     class Rook : Piece
     {
-        public Rook(bool black) : base(black)
+		public Rook(Position position, bool black, String pathImage)
+			: base(position, black, pathImage)
         {
 
         }

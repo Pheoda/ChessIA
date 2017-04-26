@@ -10,7 +10,8 @@ namespace ChessIA
     {
         private bool isFirstMove;
 
-        public Pawn(bool black) : base(black)
+		public Pawn(Position position, bool black, String pathImage)
+			: base(position, black, pathImage)
         {
             isFirstMove = true;
         }

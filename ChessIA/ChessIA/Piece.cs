@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ChessIA
 {
@@ -10,10 +13,17 @@ namespace ChessIA
     {
 		protected Position position;
 		protected bool isBlack;
+		protected PictureBox picture;
 
-		public Piece(bool black)
+		public Piece(Position position, bool black, String pathImage)
 		{
-			isBlack = black;
+			this.position = position;
+			this.isBlack = black;
+			this.picture = new PictureBox();
+			FileStream fs = new FileStream(pathImage, FileMode.Open);
+			picture.Image = Image.FromStream(fs);
+			fs.Close();
+			refreshPicture();
 		}
 
 		// Bouge la piece a la position pos en effectuant les tests necessaires
@@ -40,6 +50,11 @@ namespace ChessIA
 		public Position getPos()
 		{
 			return position;
+		}
+		public void refreshPicture()
+		{
+			this.picture.Location = new Point(position.getX() * 81 + 377, position.getY() * 81 + 12);
+			Console.WriteLine("IMAGE POSITION : " + (position.getX() * 81 + 377) + "/" + (position.getY() * 81 + 12));
 		}
     }
 }
