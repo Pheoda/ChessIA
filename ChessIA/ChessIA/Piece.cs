@@ -15,13 +15,14 @@ namespace ChessIA
 		protected bool isBlack;
 		protected PictureBox picture;
 
-		public Piece(Position position, bool black, String pathImage)
+		public Piece(Position position, bool black, String pathImage, TableLayoutPanel parentPanel)
 		{
 			this.position = position;
 			this.isBlack = black;
 			this.picture = new PictureBox();
 			FileStream fs = new FileStream(pathImage, FileMode.Open);
 			picture.Image = Image.FromStream(fs);
+			picture.Parent = parentPanel;
 			fs.Close();
 			refreshPicture();
 		}
@@ -53,8 +54,8 @@ namespace ChessIA
 		}
 		public void refreshPicture()
 		{
-			this.picture.Location = new Point(position.getX() * 81 + 377, position.getY() * 81 + 12);
-			Console.WriteLine("IMAGE POSITION : " + (position.getX() * 81 + 377) + "/" + (position.getY() * 81 + 12));
+			this.picture.Location = new Point(position.getX() * (picture.Parent.Size.Height / 8) + picture.Parent.Left, position.getY() * (picture.Parent.Size.Width / 8) + picture.Parent.Top);
+			Console.WriteLine("IMAGE POSITION : " + (position.getX() * (picture.Parent.Size.Height / 8) + picture.Parent.Left) + "/" + (position.getY() * (picture.Parent.Size.Width / 8) + picture.Parent.Top));
 		}
     }
 }

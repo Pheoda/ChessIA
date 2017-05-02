@@ -18,7 +18,7 @@ namespace ChessIA
         {
             InitializeComponent();
 
-			board = new Chessboard();
+			board = new Chessboard(chessboard);
 
         }
 
