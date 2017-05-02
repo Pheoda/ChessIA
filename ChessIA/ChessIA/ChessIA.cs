@@ -63,6 +63,7 @@ namespace ChessIA
 				board.changeTurn();
 				blackRadioButton.Checked = board.getTurn();
 				whiteRadioButton.Checked = !board.getTurn();
+                board.refresh();
 			}
 		}
     }

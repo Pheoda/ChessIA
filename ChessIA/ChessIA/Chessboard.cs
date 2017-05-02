@@ -13,11 +13,14 @@ namespace ChessIA
     {
 		private Piece[] pieces;
 		private bool turn;
+        private TableLayoutPanel layoutPanel;
 
 		public static int SIZE = 8;
 		
         public Chessboard(TableLayoutPanel panel)
         {
+            layoutPanel = panel;
+
 			pieces = new Piece[24];
 			pieces[0] = new Rook(new Position(0, 0), true, "../../Images/noir_tour.png", panel);
 			pieces[1] = new Bishop(new Position(2, 0), true, "../../Images/noir_fou.png", panel);
@@ -49,6 +52,8 @@ namespace ChessIA
 			pieces[21] = new Pawn(new Position(2, 5), false, "../../Images/blanc_pion.png", panel);
 			pieces[22] = new Pawn(new Position(4, 5), false, "../../Images/blanc_pion.png", panel);
 			pieces[23] = new Pawn(new Position(6, 5), false, "../../Images/blanc_pion.png", panel);
+
+            refresh();
 
 			turn = false; // Tour des blancs au demarrage
         }
@@ -108,5 +113,12 @@ namespace ChessIA
 		{
 			return this.turn;
 		}
+        public void refresh()
+        {
+            foreach(Piece p in pieces)
+            {
+                layoutPanel.SetCellPosition(p.getPicture(), new TableLayoutPanelCellPosition(p.getPos().getX(), p.getPos().getY()));
+            }
+        }
     }
 }

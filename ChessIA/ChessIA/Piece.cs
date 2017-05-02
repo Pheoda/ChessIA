@@ -23,8 +23,9 @@ namespace ChessIA
 			FileStream fs = new FileStream(pathImage, FileMode.Open);
 			picture.Image = Image.FromStream(fs);
 			picture.Parent = parentPanel;
+            int size = (int)parentPanel.Size.Height / (int)parentPanel.ColumnCount;
+            picture.Size = new Size(new Point(size, size));
 			fs.Close();
-			refreshPicture();
 		}
 
 		// Bouge la piece a la position pos en effectuant les tests necessaires
@@ -52,10 +53,16 @@ namespace ChessIA
 		{
 			return position;
 		}
+        public PictureBox getPicture()
+        {
+            return this.picture;
+        }
 		public void refreshPicture()
 		{
+            /*
 			this.picture.Location = new Point(position.getX() * (picture.Parent.Size.Height / 8) + picture.Parent.Left, position.getY() * (picture.Parent.Size.Width / 8) + picture.Parent.Top);
 			Console.WriteLine("IMAGE POSITION : " + (position.getX() * (picture.Parent.Size.Height / 8) + picture.Parent.Left) + "/" + (position.getY() * (picture.Parent.Size.Width / 8) + picture.Parent.Top));
-		}
+	        */	
+        }
     }
 }
