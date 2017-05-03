@@ -91,7 +91,11 @@ namespace ChessIA
 							if(needDelete != null) // Si on a mangé une pièce, on la supprime de la liste
 								pieces.Remove(needDelete);
 
-							piece.setPos(endPos); // On déplace la pièce à la position finale
+                            // Suppression sprite sur l'ancienne case
+                            layoutPanel.GetControlFromPosition(piece.getPos().getX(), piece.getPos().getY()).BackgroundImage = null;
+
+                            // On déplace la pièce à la position finale
+                            piece.setPos(endPos);
 						}
 
 						return pieceMoved;

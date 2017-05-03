@@ -65,5 +65,22 @@ namespace ChessIA
 				Console.WriteLine("Mouvement impossible");
 			}
 		}
+
+        private void inputX1_Enter(object sender, EventArgs e)
+        {
+            inputX1.Select(0, 1);
+        }
+        private void inputY1_Enter(object sender, EventArgs e)
+        {
+            inputY1.Select(0, 1);
+        }
+        private void inputX2_Enter(object sender, EventArgs e)
+        {
+            inputX2.Select(0, 1);
+        }
+        private void inputY2_Enter(object sender, EventArgs e)
+        {
+            inputY2.Select(0, 1);
+        }
     }
 }
