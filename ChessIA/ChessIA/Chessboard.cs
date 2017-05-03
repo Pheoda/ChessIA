@@ -22,7 +22,7 @@ namespace ChessIA
         {
             layoutPanel = panel;
 
-			List<Piece> pieces = new List<Piece>();
+			pieces = new List<Piece>();
 			pieces.Add(new Rook(new Position(0, 0), true, Properties.Resources.noir_tour));
 			pieces.Add(new Bishop(new Position(2, 0), true, Properties.Resources.noir_fou));
 			pieces.Add(new King(new Position(4, 0), true, Properties.Resources.noir_roi));
