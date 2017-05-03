@@ -88,7 +88,6 @@
 			this.chessboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
 			this.chessboard.Size = new System.Drawing.Size(650, 650);
 			this.chessboard.TabIndex = 0;
-			this.chessboard.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.chessboard_CellPaint);
 			// 
 			// inputY1
 			// 

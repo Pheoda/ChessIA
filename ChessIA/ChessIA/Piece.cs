@@ -13,38 +13,17 @@ namespace ChessIA
     {
 		protected Position position;
 		protected bool isBlack;
-		protected PictureBox picture;
 		protected Image image;
 
-		public Piece(Position position, bool black, Image image, TableLayoutPanel parentPanel)
+		public Piece(Position position, bool black, Image image)
 		{
 			this.position = position;
 			this.isBlack = black;
-			this.picture = new PictureBox();
-			picture.Image = image;
-			picture.Parent = parentPanel;
-            int size = (int)parentPanel.Size.Height / (int)parentPanel.ColumnCount;
-            picture.Size = new Size(new Point(size, size));
-			picture.BackColor = Color.Transparent;
 			this.image = image;
 		}
 
 		// Bouge la piece a la position pos en effectuant les tests necessaires
-        public bool move(Position pos, Piece[] pieces)
-		{
-			if(canMove(pos, pieces))
-			{
-				return true;
-			}
-			else
-			{
-				Console.WriteLine("Impossible move for this piece");
-				return false;
-			}
-		}
-		
-		// Est-ce que la piece peut se deplacer vers endPos ?
-		public abstract bool canMove(Position endPos, Piece[] pieces);
+		public abstract bool canMove(Position endPos, List<Piece> pieces);
 
 		public bool getIsBlack()
 		{
@@ -54,13 +33,13 @@ namespace ChessIA
 		{
 			return position;
 		}
+		public void setPos(Position pos)
+		{
+			this.position = pos;
+		}
 		public Image getImage()
 		{
 			return this.image;
 		}
-        public PictureBox getPicture()
-        {
-            return this.picture;
-        }
     }
 }

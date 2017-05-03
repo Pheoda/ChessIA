@@ -17,26 +17,24 @@ namespace ChessIA
         public ChessIA()
         {
             InitializeComponent();
-
-			board = new Chessboard(chessboard);
-
         }
 
         private void ChessIA_Load(object sender, EventArgs e)
         {
+			for (int x = 0; x < 8; x++)
+				for (int y = 0; y < 8; y++)
+				{
+					Panel p = new Panel();
 
-        }
+					if ((x + y) % 2 == 0)
+						p.BackColor = Color.WhiteSmoke;
+					else
+						p.BackColor = Color.Brown;
+					p.BackgroundImageLayout = ImageLayout.Stretch;
+					chessboard.Controls.Add(p, x, y);
+				}
 
-        private void chessboard_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
-        {
-            if ((e.Column + e.Row ) % 2 == 0 )
-            {
-                e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.CellBounds);
-            }
-            else
-            {
-                e.Graphics.FillRectangle(Brushes.Brown, e.CellBounds);
-            }
+			board = new Chessboard(chessboard);
         }
 
 		private void deplacementButton_Click(object sender, EventArgs e)
@@ -61,6 +59,10 @@ namespace ChessIA
 				else
 					labelTurn.Text = "Blanc";
 				board.refresh();
+			}
+			else
+			{
+				Console.WriteLine("Mouvement impossible");
 			}
 		}
     }

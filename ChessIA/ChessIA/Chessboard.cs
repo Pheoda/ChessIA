@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace ChessIA
 {
     class Chessboard
     {
-		private Piece[] pieces;
+		private List<Piece> pieces;
 		private bool turn;
         private TableLayoutPanel layoutPanel;
 
@@ -21,76 +22,42 @@ namespace ChessIA
         {
             layoutPanel = panel;
 
-			pieces = new Piece[24];
-			pieces[0] = new Rook(new Position(0, 0), true, Properties.Resources.noir_tour, panel);
-			pieces[1] = new Bishop(new Position(2, 0), true, Properties.Resources.noir_fou, panel);
-			pieces[2] = new King(new Position(4, 0), true, Properties.Resources.noir_roi, panel);
-			pieces[3] = new Knight(new Position(6, 0), true, Properties.Resources.noir_cavalier, panel);
+			List<Piece> pieces = new List<Piece>();
+			pieces.Add(new Rook(new Position(0, 0), true, Properties.Resources.noir_tour));
+			pieces.Add(new Bishop(new Position(2, 0), true, Properties.Resources.noir_fou));
+			pieces.Add(new King(new Position(4, 0), true, Properties.Resources.noir_roi));
+			pieces.Add(new Knight(new Position(6, 0), true, Properties.Resources.noir_cavalier));
 
-			pieces[4] = new Pawn(new Position(1, 1), true, Properties.Resources.noir_pion, panel);
-			pieces[5] = new Pawn(new Position(3, 1), true, Properties.Resources.noir_pion, panel);
-			pieces[6] = new Pawn(new Position(5, 1), true, Properties.Resources.noir_pion, panel);
-			pieces[7] = new Pawn(new Position(7, 1), true, Properties.Resources.noir_pion, panel);
+			pieces.Add(new Pawn(new Position(1, 1), true, Properties.Resources.noir_pion));
+			pieces.Add(new Pawn(new Position(3, 1), true, Properties.Resources.noir_pion));
+			pieces.Add(new Pawn(new Position(5, 1), true, Properties.Resources.noir_pion));
+			pieces.Add(new Pawn(new Position(7, 1), true, Properties.Resources.noir_pion));
 
-			pieces[8] = new Pawn(new Position(0, 2), true, Properties.Resources.noir_pion, panel);
-			pieces[9] = new Pawn(new Position(2, 2), true, Properties.Resources.noir_pion, panel);
-			pieces[10] = new Pawn(new Position(4, 2), true, Properties.Resources.noir_pion, panel);
-			pieces[11] = new Pawn(new Position(6, 2), true, Properties.Resources.noir_pion, panel);
+			pieces.Add(new Pawn(new Position(0, 2), true, Properties.Resources.noir_pion));
+			pieces.Add(new Pawn(new Position(2, 2), true, Properties.Resources.noir_pion));
+			pieces.Add(new Pawn(new Position(4, 2), true, Properties.Resources.noir_pion));
+			pieces.Add(new Pawn(new Position(6, 2), true, Properties.Resources.noir_pion));
 
 
-			pieces[12] = new Rook(new Position(0, 7), false, Properties.Resources.blanc_tour, panel);
-			pieces[13] = new Bishop(new Position(2, 7), false, Properties.Resources.blanc_fou, panel);
-			pieces[14] = new King(new Position(4, 7), false, Properties.Resources.blanc_roi, panel);
-			pieces[15] = new Knight(new Position(6, 7), false, Properties.Resources.blanc_cavalier, panel);
+			pieces.Add(new Rook(new Position(0, 7), false, Properties.Resources.blanc_tour));
+			pieces.Add(new Bishop(new Position(2, 7), false, Properties.Resources.blanc_fou));
+			pieces.Add(new King(new Position(4, 7), false, Properties.Resources.blanc_roi));
+			pieces.Add(new Knight(new Position(6, 7), false, Properties.Resources.blanc_cavalier));
 
-			pieces[16] = new Pawn(new Position(1, 6), false, Properties.Resources.blanc_pion, panel);
-			pieces[17] = new Pawn(new Position(3, 6), false, Properties.Resources.blanc_pion, panel);
-			pieces[18] = new Pawn(new Position(5, 6), false, Properties.Resources.blanc_pion, panel);
-			pieces[19] = new Pawn(new Position(7, 6), false, Properties.Resources.blanc_pion, panel);
+			pieces.Add(new Pawn(new Position(1, 6), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(3, 6), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(5, 6), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(7, 6), false, Properties.Resources.blanc_pion));
 
-			pieces[20] = new Pawn(new Position(0, 5), false, Properties.Resources.blanc_pion, panel);
-			pieces[21] = new Pawn(new Position(2, 5), false, Properties.Resources.blanc_pion, panel);
-			pieces[22] = new Pawn(new Position(4, 5), false, Properties.Resources.blanc_pion, panel);
-			pieces[23] = new Pawn(new Position(6, 5), false, Properties.Resources.blanc_pion, panel);
-
-            refresh();
+			pieces.Add(new Pawn(new Position(0, 5), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(2, 5), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(4, 5), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(6, 5), false, Properties.Resources.blanc_pion));
 
 			turn = false; // Tour des blancs au demarrage
+
+			refresh();
         }
-
-		// Saisie clavier
-		public void keyboardInput()
-		{
-			int x1, y1, x2, y2;
-
-			do
-			{
-				Console.WriteLine("Entrer position de depart : ");
-				// Saisie piece de depart
-				x1 = safeInput(0, SIZE-1);
-				y1 = safeInput(0, SIZE-1);
-
-				Console.WriteLine("Entrer position d'arrivee : ");
-				// Saisie position d'arrivee
-				x2 = safeInput(0, SIZE-1);
-				y2 = safeInput(0, SIZE-1);
-
-				Console.WriteLine("Entree : {0}/{1} et {2}/{3}", x1, y1, x2, y2);
-				
-			}while(!movePiece(new Position(x1, y1), new Position(x2, y2)));
-		}
-
-		// Renvoie la saisie clavier avec conditions min/max
-		private int safeInput(int min, int max)
-		{
-			int result;
-			do
-			{
-				while (!Int32.TryParse(Console.ReadLine(), out result)) ; // Tant qu'on a pas recupere un entier
-			}while(result < min || result > max);
-
-			return result;
-		}
 
 		// Bouge la piece si possible suivant la saisie clavier precedente
 		public bool movePiece(Position startPos, Position endPos)
@@ -99,13 +66,36 @@ namespace ChessIA
 			{
 				if (piece.getPos().getX() == startPos.getX() && piece.getPos().getY() == startPos.getY())
 				{
-					if(piece.getIsBlack() != this.turn) // On s'assure que la couleur jouee est bien la bonne
+					if (piece.getIsBlack() != this.turn) // On s'assure que la couleur jouee est bien la bonne
 					{
 						Console.WriteLine("Ce n'est pas à cette couleur de jouer !");
 						return false;
 					}
-					else
-						return piece.move(endPos, this.pieces);
+					else // Si le déplacement est correct, on déplace ou on mange la pièce ciblée
+					{
+						bool pieceMoved = piece.canMove(endPos, this.pieces);
+
+						if(pieceMoved) // Déplacement valide
+						{
+							Piece needDelete = null;
+							Console.WriteLine("Déplacement valide.");
+
+							// Vérification s'il s'agit d'une prise de pièce
+							foreach(Piece p in pieces)
+							{
+								if(p.getPos().getX() == endPos.getX() && p.getPos().getY() == endPos.getY()) // On mange
+								{
+									needDelete = p;
+								}
+							}
+							if(needDelete != null) // Si on a mangé une pièce, on la supprime de la liste
+								pieces.Remove(needDelete);
+
+							piece.setPos(endPos); // On déplace la pièce à la position finale
+						}
+
+						return pieceMoved;
+					}
 				}
 			}
 			Console.WriteLine("Piece non trouvee");
@@ -123,7 +113,10 @@ namespace ChessIA
         {
             foreach(Piece p in pieces)
             {
-                layoutPanel.SetCellPosition(p.getPicture(), new TableLayoutPanelCellPosition(p.getPos().getX(), p.getPos().getY()));
+				// Prends en compte le type de la pièce pour attribuer le sprite correspondant ?
+				// ......
+
+				layoutPanel.GetControlFromPosition(p.getPos().getX(), p.getPos().getY()).BackgroundImage = p.getImage();
             }
         }
     }
