@@ -43,11 +43,6 @@ namespace ChessIA
 		{
 			int x1, y1, x2, y2;
 
-			// Check non vide
-			/*if(inputX1.Value == String.Empty || inputY1.Value == String.Empty 
-				|| inputX2.Value == String.Empty || inputY2.Value == String.Empty)
-				return;*/
-
 			// Piece de depart
 			x1 = (int)inputX1.Value;
 			y1 = (int)inputY1.Value;

@@ -14,6 +14,7 @@ namespace ChessIA
 		protected Position position;
 		protected bool isBlack;
 		protected PictureBox picture;
+		protected Image image;
 
 		public Piece(Position position, bool black, Image image, TableLayoutPanel parentPanel)
 		{
@@ -25,6 +26,7 @@ namespace ChessIA
             int size = (int)parentPanel.Size.Height / (int)parentPanel.ColumnCount;
             picture.Size = new Size(new Point(size, size));
 			picture.BackColor = Color.Transparent;
+			this.image = image;
 		}
 
 		// Bouge la piece a la position pos en effectuant les tests necessaires
@@ -51,6 +53,10 @@ namespace ChessIA
 		public Position getPos()
 		{
 			return position;
+		}
+		public Image getImage()
+		{
+			return this.image;
 		}
         public PictureBox getPicture()
         {
