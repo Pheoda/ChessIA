@@ -21,7 +21,7 @@ namespace ChessIA
         public override bool canMove(Position endPos, Piece[] pieces)
         {
 			// déplacement en avançant uniquement
-            if (this.isBlack)
+            if (!this.isBlack)
             {
                 // déplacement en diagonale
                 if ((this.position.getY() + 1) == endPos.getY())
@@ -132,8 +132,6 @@ namespace ChessIA
                 }
             }
             return false;
-            throw new NotImplementedException();
-
         }
     }
 }

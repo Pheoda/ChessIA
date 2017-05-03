@@ -20,7 +20,22 @@ namespace ChessIA
 
 		public override bool canMove(Position endPos, Piece[] pieces)
         {
-            throw new NotImplementedException();
+            if (Math.Abs(this.getPos().getX() - endPos.getX()) < 2 && Math.Abs(this.getPos().getY() - endPos.getY()) < 2)
+            {
+                foreach(Piece piece in pieces)
+                {
+                    if (piece.getPos().getY() == endPos.getY() && piece.getPos().getX() == endPos.getX() && this.isBlack != piece.getIsBlack())
+                    {
+                        return true;
+                    }
+                    if (piece.getPos().getY() == endPos.getY() && piece.getPos().getX() == endPos.getX() && this.isBlack == piece.getIsBlack())
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

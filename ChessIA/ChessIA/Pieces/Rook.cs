@@ -20,7 +20,19 @@ namespace ChessIA
         {
 
             if (this.position.getX() == endPos.getX())
-            {
+            {   
+                //on regarde si il n'y a pas de pions sur le trajet 
+                for (int i = this.position.getX(); i < endPos.getX(); i++)
+                {
+                    foreach (Piece piece in pieces)
+                    {
+                        if (piece.getPos().getX() == i && piece.getPos().getY() == this.getPos().getY())
+                        {
+                            return false;
+                        }
+                    }
+                }
+
                 if (endPos.getY() - this.position.getY() > 0)
                 {
                     for (int i = (this.position.getY() + 1); i < endPos.getY(); i++)
@@ -51,6 +63,18 @@ namespace ChessIA
             }
             else if (this.position.getY() == endPos.getY())
             {
+                //on regarde si il n'y a pas de pions sur le trajet 
+                for (int i = this.position.getY(); i < endPos.getY(); i++)
+                {
+                    foreach (Piece piece in pieces)
+                    {
+                        if (piece.getPos().getX() == i && piece.getPos().getY() == this.getPos().getY())
+                        {
+                            return false;
+                        }
+                    }
+                }
+
                 if ((endPos.getX() - this.position.getX()) > 0)
                 {
                     for (int i = (this.position.getX() + 1); i < endPos.getX(); i++)

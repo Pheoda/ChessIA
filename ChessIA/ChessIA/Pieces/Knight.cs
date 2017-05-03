@@ -24,9 +24,12 @@ namespace ChessIA
                 {
                     return true;
                 }
+                if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack == piece.getIsBlack())
+                {
+                    return false;
+                }
             }
-            return false;
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
