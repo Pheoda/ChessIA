@@ -10,13 +10,13 @@ namespace ChessIA
 {
     class Bishop : Piece
     {
-		public Bishop(Position position, bool black, Image image, TableLayoutPanel panel)
-			: base(position, black, image, panel)
+		public Bishop(Position position, bool black, Image image)
+			: base(position, black, image)
         {
 
         }
 
-		public override bool canMove(Position endPos, Piece[] pieces)
+		public override bool canMove(Position endPos, List<Piece> pieces)
         {
             throw new NotImplementedException();
         }

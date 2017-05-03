@@ -12,13 +12,13 @@ namespace ChessIA
     {
         private bool isFirstMove;
 
-		public Pawn(Position position, bool black, Image image, TableLayoutPanel panel)
-			: base(position, black, image, panel)
+		public Pawn(Position position, bool black, Image image)
+			: base(position, black, image)
         {
             isFirstMove = true;
         }
 
-        public override bool canMove(Position endPos, Piece[] pieces)
+		public override bool canMove(Position endPos, List<Piece> pieces)
         {
 			// déplacement en avançant uniquement
             if (this.isBlack)
