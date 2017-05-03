@@ -61,9 +61,11 @@ namespace ChessIA
 			if (board.movePiece(new Position(x1, y1), new Position(x2, y2)))
 			{
 				board.changeTurn();
-				blackRadioButton.Checked = board.getTurn();
-				whiteRadioButton.Checked = !board.getTurn();
-                board.refresh();
+				if (board.getTurn()) // Tour noir
+					labelTurn.Text = "Noir";
+				else
+					labelTurn.Text = "Blanc";
+				board.refresh();
 			}
 		}
     }

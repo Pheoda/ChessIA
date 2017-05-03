@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,8 @@ namespace ChessIA
 {
     class Bishop : Piece
     {
-		public Bishop(Position position, bool black, String pathImage, TableLayoutPanel panel)
-			: base(position, black, pathImage, panel)
+		public Bishop(Position position, bool black, Image image, TableLayoutPanel panel)
+			: base(position, black, image, panel)
         {
 
         }

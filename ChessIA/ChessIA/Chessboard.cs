@@ -22,36 +22,36 @@ namespace ChessIA
             layoutPanel = panel;
 
 			pieces = new Piece[24];
-			pieces[0] = new Rook(new Position(0, 0), true, "../../Images/noir_tour.png", panel);
-			pieces[1] = new Bishop(new Position(2, 0), true, "../../Images/noir_fou.png", panel);
-			pieces[2] = new King(new Position(4, 0), true, "../../Images/noir_roi.png", panel);
-			pieces[3] = new Knight(new Position(6, 0), true, "../../Images/noir_cavalier.png", panel);
+			pieces[0] = new Rook(new Position(0, 0), true, Properties.Resources.noir_tour, panel);
+			pieces[1] = new Bishop(new Position(2, 0), true, Properties.Resources.noir_fou, panel);
+			pieces[2] = new King(new Position(4, 0), true, Properties.Resources.noir_roi, panel);
+			pieces[3] = new Knight(new Position(6, 0), true, Properties.Resources.noir_cavalier, panel);
 
-			pieces[4] = new Pawn(new Position(1, 1), true, "../../Images/noir_pion.png", panel);
-			pieces[5] = new Pawn(new Position(3, 1), true, "../../Images/noir_pion.png", panel);
-			pieces[6] = new Pawn(new Position(5, 1), true, "../../Images/noir_pion.png", panel);
-			pieces[7] = new Pawn(new Position(7, 1), true, "../../Images/noir_pion.png", panel);
+			pieces[4] = new Pawn(new Position(1, 1), true, Properties.Resources.noir_pion, panel);
+			pieces[5] = new Pawn(new Position(3, 1), true, Properties.Resources.noir_pion, panel);
+			pieces[6] = new Pawn(new Position(5, 1), true, Properties.Resources.noir_pion, panel);
+			pieces[7] = new Pawn(new Position(7, 1), true, Properties.Resources.noir_pion, panel);
 
-			pieces[8] = new Pawn(new Position(0, 2), true, "../../Images/noir_pion.png", panel);
-			pieces[9] = new Pawn(new Position(2, 2), true, "../../Images/noir_pion.png", panel);
-			pieces[10] = new Pawn(new Position(4, 2), true, "../../Images/noir_pion.png", panel);
-			pieces[11] = new Pawn(new Position(6, 2), true, "../../Images/noir_pion.png", panel);
+			pieces[8] = new Pawn(new Position(0, 2), true, Properties.Resources.noir_pion, panel);
+			pieces[9] = new Pawn(new Position(2, 2), true, Properties.Resources.noir_pion, panel);
+			pieces[10] = new Pawn(new Position(4, 2), true, Properties.Resources.noir_pion, panel);
+			pieces[11] = new Pawn(new Position(6, 2), true, Properties.Resources.noir_pion, panel);
 
 
-			pieces[12] = new Rook(new Position(0, 7), false, "../../Images/blanc_tour.png", panel);
-			pieces[13] = new Bishop(new Position(2, 7), false, "../../Images/blanc_fou.png", panel);
-			pieces[14] = new King(new Position(4, 7), false, "../../Images/blanc_roi.png", panel);
-			pieces[15] = new Knight(new Position(6, 7), false, "../../Images/blanc_cavalier.png", panel);
+			pieces[12] = new Rook(new Position(0, 7), false, Properties.Resources.blanc_tour, panel);
+			pieces[13] = new Bishop(new Position(2, 7), false, Properties.Resources.blanc_fou, panel);
+			pieces[14] = new King(new Position(4, 7), false, Properties.Resources.blanc_roi, panel);
+			pieces[15] = new Knight(new Position(6, 7), false, Properties.Resources.blanc_cavalier, panel);
 
-			pieces[16] = new Pawn(new Position(1, 6), false, "../../Images/blanc_pion.png", panel);
-			pieces[17] = new Pawn(new Position(3, 6), false, "../../Images/blanc_pion.png", panel);
-			pieces[18] = new Pawn(new Position(5, 6), false, "../../Images/blanc_pion.png", panel);
-			pieces[19] = new Pawn(new Position(7, 6), false, "../../Images/blanc_pion.png", panel);
+			pieces[16] = new Pawn(new Position(1, 6), false, Properties.Resources.blanc_pion, panel);
+			pieces[17] = new Pawn(new Position(3, 6), false, Properties.Resources.blanc_pion, panel);
+			pieces[18] = new Pawn(new Position(5, 6), false, Properties.Resources.blanc_pion, panel);
+			pieces[19] = new Pawn(new Position(7, 6), false, Properties.Resources.blanc_pion, panel);
 
-			pieces[20] = new Pawn(new Position(0, 5), false, "../../Images/blanc_pion.png", panel);
-			pieces[21] = new Pawn(new Position(2, 5), false, "../../Images/blanc_pion.png", panel);
-			pieces[22] = new Pawn(new Position(4, 5), false, "../../Images/blanc_pion.png", panel);
-			pieces[23] = new Pawn(new Position(6, 5), false, "../../Images/blanc_pion.png", panel);
+			pieces[20] = new Pawn(new Position(0, 5), false, Properties.Resources.blanc_pion, panel);
+			pieces[21] = new Pawn(new Position(2, 5), false, Properties.Resources.blanc_pion, panel);
+			pieces[22] = new Pawn(new Position(4, 5), false, Properties.Resources.blanc_pion, panel);
+			pieces[23] = new Pawn(new Position(6, 5), false, Properties.Resources.blanc_pion, panel);
 
             refresh();
 
@@ -97,9 +97,15 @@ namespace ChessIA
 		{
 			foreach(Piece piece in pieces)
 			{
-				if (piece.getPos() == startPos)
+				if (piece.getPos().getX() == startPos.getX() && piece.getPos().getY() == startPos.getY())
 				{
-					return piece.move(endPos, this.pieces);
+					if(piece.getIsBlack() != this.turn) // On s'assure que la couleur jouee est bien la bonne
+					{
+						Console.WriteLine("Ce n'est pas à cette couleur de jouer !");
+						return false;
+					}
+					else
+						return piece.move(endPos, this.pieces);
 				}
 			}
 			Console.WriteLine("Piece non trouvee");

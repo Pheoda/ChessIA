@@ -89,6 +89,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sprites\blanc_cavalier.png" />
+    <Content Include="Sprites\blanc_fou.png" />
+    <Content Include="Sprites\blanc_pion.png" />
+    <Content Include="Sprites\blanc_roi.png" />
+    <Content Include="Sprites\blanc_tour.png" />
+    <Content Include="Sprites\noir_cavalier.png" />
+    <Content Include="Sprites\noir_fou.png" />
+    <Content Include="Sprites\noir_pion.png" />
+    <Content Include="Sprites\noir_roi.png" />
+    <Content Include="Sprites\noir_tour.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -36,8 +36,7 @@
 			this.labelPosition1 = new System.Windows.Forms.Label();
 			this.labelPosition2 = new System.Windows.Forms.Label();
 			this.deplacementButton = new System.Windows.Forms.Button();
-			this.whiteRadioButton = new System.Windows.Forms.RadioButton();
-			this.blackRadioButton = new System.Windows.Forms.RadioButton();
+			this.labelInfoTour = new System.Windows.Forms.Label();
 			this.labelTurn = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.inputY1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputX1)).BeginInit();
@@ -147,36 +146,24 @@
 			this.deplacementButton.UseVisualStyleBackColor = true;
 			this.deplacementButton.Click += new System.EventHandler(this.deplacementButton_Click);
 			// 
-			// whiteRadioButton
+			// labelInfoTour
 			// 
-			this.whiteRadioButton.AutoSize = true;
-			this.whiteRadioButton.Location = new System.Drawing.Point(28, 311);
-			this.whiteRadioButton.Name = "whiteRadioButton";
-			this.whiteRadioButton.Size = new System.Drawing.Size(52, 17);
-			this.whiteRadioButton.TabIndex = 8;
-			this.whiteRadioButton.TabStop = true;
-			this.whiteRadioButton.Text = "Blanc";
-			this.whiteRadioButton.UseVisualStyleBackColor = true;
-			// 
-			// blackRadioButton
-			// 
-			this.blackRadioButton.AutoSize = true;
-			this.blackRadioButton.Location = new System.Drawing.Point(104, 311);
-			this.blackRadioButton.Name = "blackRadioButton";
-			this.blackRadioButton.Size = new System.Drawing.Size(53, 17);
-			this.blackRadioButton.TabIndex = 9;
-			this.blackRadioButton.TabStop = true;
-			this.blackRadioButton.Text = "White";
-			this.blackRadioButton.UseVisualStyleBackColor = true;
+			this.labelInfoTour.AutoSize = true;
+			this.labelInfoTour.Location = new System.Drawing.Point(12, 295);
+			this.labelInfoTour.Name = "labelInfoTour";
+			this.labelInfoTour.Size = new System.Drawing.Size(32, 13);
+			this.labelInfoTour.TabIndex = 10;
+			this.labelInfoTour.Text = "Tour ";
 			// 
 			// labelTurn
 			// 
 			this.labelTurn.AutoSize = true;
-			this.labelTurn.Location = new System.Drawing.Point(12, 295);
+			this.labelTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelTurn.Location = new System.Drawing.Point(50, 295);
 			this.labelTurn.Name = "labelTurn";
-			this.labelTurn.Size = new System.Drawing.Size(32, 13);
-			this.labelTurn.TabIndex = 10;
-			this.labelTurn.Text = "Tour ";
+			this.labelTurn.Size = new System.Drawing.Size(54, 20);
+			this.labelTurn.TabIndex = 11;
+			this.labelTurn.Text = "Blanc";
 			// 
 			// ChessIA
 			// 
@@ -184,8 +171,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1284, 714);
 			this.Controls.Add(this.labelTurn);
-			this.Controls.Add(this.blackRadioButton);
-			this.Controls.Add(this.whiteRadioButton);
+			this.Controls.Add(this.labelInfoTour);
 			this.Controls.Add(this.deplacementButton);
 			this.Controls.Add(this.labelPosition2);
 			this.Controls.Add(this.labelPosition1);
@@ -216,8 +202,7 @@
 		private System.Windows.Forms.Label labelPosition1;
 		private System.Windows.Forms.Label labelPosition2;
 		private System.Windows.Forms.Button deplacementButton;
-		private System.Windows.Forms.RadioButton whiteRadioButton;
-		private System.Windows.Forms.RadioButton blackRadioButton;
+		private System.Windows.Forms.Label labelInfoTour;
 		private System.Windows.Forms.Label labelTurn;
     }
 }
