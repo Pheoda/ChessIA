@@ -18,18 +18,24 @@ namespace ChessIA
 
 		public override bool canMove(Position endPos, List<Piece> pieces)
         {
-            foreach (Piece piece in pieces)
+            int dist = (endPos.getX() - this.getPos().getX()) * (endPos.getX() - this.getPos().getX()) + (endPos.getY() - this.getPos().getY()) * (endPos.getY() - this.getPos().getY());
+            if (dist == 5)
             {
-                if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack != piece.getIsBlack())
+
+                foreach (Piece piece in pieces)
                 {
-                    return true;
+                    if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack != piece.getIsBlack())
+                    {
+                        return true;
+                    }
+                    if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack == piece.getIsBlack())
+                    {
+                        return false;
+                    }
                 }
-                if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack == piece.getIsBlack())
-                {
-                    return false;
-                }
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }
