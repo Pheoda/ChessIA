@@ -17,121 +17,136 @@ namespace ChessIA
         {
             isFirstMove = true;
         }
-
-		public override bool canMove(Position endPos, List<Piece> pieces)
-        {
-			// déplacement en avançant uniquement
-            if (!this.isBlack)
+        public bool _isFirstMove {
+            get
             {
-                // déplacement en diagonale
-                if ((this.position.getY() + 1) == endPos.getY())
+                return isFirstMove;
+            }
+            set
+            {
+                isFirstMove = value;
+            }
+        }
+        public override bool canMove(Position endPos, List<Piece> pieces)
+        {
+            if (this.isBlack)
+            {
+                //On regarde si le déplacement est effectué dans le bon sens
+                if (endPos.getY() > this.getPos().getY())
                 {
-                    if ((endPos.getX() == (this.position.getX() + 1)) || (endPos.getX() == (this.position.getX() - 1)))
+                    int offset = endPos.getY() - this.getPos().getY();
+
+                    switch (offset)
                     {
-                        foreach (Piece piece in pieces)
-                        {
-                            if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack != piece.getIsBlack())
+                        case 1:
+                            //check if not a diagonal move + no piece at endPos
+                            if (this.getPos().getX() == endPos.getX())
                             {
+                                foreach (Piece piece in pieces)
+                                {
+                                    if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == endPos.getY())
+                                    {
+                                        return false;
+                                    }
+                                }
                                 return true;
                             }
-                            else
+                            //Diagonal move + check if ennemie
+                            else if (Math.Abs(endPos.getX() - this.getPos().getX()) == 1)
                             {
-                                return false;
-                            }
-                        }
-                    }
-                    return false;
-                }
-                // premier déplacement 1 ou 2 cases en avant
-                if (this.isFirstMove)
-                {
-                    if (this.position.getX() == endPos.getX() && (endPos.getY() - this.position.getY()) > 0 && (endPos.getY() - this.position.getY()) < 3)
-                    {
-                        for (int i = this.position.getY() + 1; i <= endPos.getY(); i++)
-                        {
-                            foreach (Piece piece in pieces)
-                            {
-                                if ((i == piece.getPos().getY()) && (endPos.getX() == piece.getPos().getX()))
+                                foreach (Piece piece in pieces)
                                 {
-                                    return false;
+                                    if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == endPos.getY() && !piece.getIsBlack())
+                                    {
+                                        return true;
+                                    }
                                 }
                             }
-                        }
-                    }
-                    return true;
-                }
-                // déplacement standard
-                else
-                {
-                    if (this.position.getX() == endPos.getX() && (endPos.getY() - this.position.getY()) > 0 && (endPos.getY() - this.position.getY()) < 2)
-                    {
-                        foreach (Piece piece in pieces)
-                        {
-                            if (((this.position.getY() + 1) == piece.getPos().getY()) && (endPos.getX() == piece.getPos().getX()))
+                            break;
+
+                        case 2:
+                            //check if first move and no diag
+                            if (this.isFirstMove && this.getPos().getX() == endPos.getX())
                             {
-                                return false;
+                                foreach (Piece piece in pieces)
+                                {
+                                    for (int i = this.getPos().getY() + 1; i <= endPos.getY(); i++)
+                                    {
+                                        if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == i)
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                }
+                                return true;
                             }
-                        }
-                        return true;
+                            break;
+
+                        default:
+                            return false;
                     }
                 }
+                return false;
             }
             else
             {
-                // déplacement en diagonale
-                if ((this.position.getY() - 1) == endPos.getY())
+                //On regarde si le déplacement est effectué dans le bon sens
+                if (endPos.getY() < this.getPos().getY())
                 {
-                    if ((endPos.getX() == (this.position.getX() + 1)) || (endPos.getX() == (this.position.getX() - 1)))
+                    int offset = this.getPos().getY() - endPos.getY();
+
+                    switch (offset)
                     {
-                        foreach (Piece piece in pieces)
-                        {
-                            if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack != piece.getIsBlack())
+                        case 1:
+                            //check if not a diagonal move + no piece at endPos
+                            if (this.getPos().getX() == endPos.getX())
                             {
+                                foreach (Piece piece in pieces)
+                                {
+                                    if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == endPos.getY())
+                                    {
+                                        return false;
+                                    }
+                                }
                                 return true;
                             }
-                            else
+                            //Diagonal move + check if ennemie
+                            else if (Math.Abs(endPos.getX() - this.getPos().getX()) == 1)
                             {
-                                return false;
-                            }
-                        }
-                    }
-                    return false;
-                }
-                // premier déplacement 1 ou 2 cases en avant
-                if (this.isFirstMove)
-                {
-                    if (this.position.getX() == endPos.getX() && (endPos.getY() - this.position.getY()) < 0 && (this.position.getY() - endPos.getY()) < 3)
-                    {
-                        for (int i = this.position.getY() - 1; i >= endPos.getY(); i--)
-                        {
-                            foreach (Piece piece in pieces)
-                            {
-                                if ((i == piece.getPos().getY()) && (endPos.getX() == piece.getPos().getX()))
+                                foreach (Piece piece in pieces)
                                 {
-                                    return false;
+                                    if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == endPos.getY() && piece.getIsBlack())
+                                    {
+                                        return true;
+                                    }
                                 }
                             }
-                        }
-                    }
-                    return true;
-                }
-                // déplacement standard
-                else
-                {
-                    if (this.position.getX() == endPos.getX() && (endPos.getY() - this.position.getY()) < 0 && (this.position.getY() - endPos.getY()) < 2)
-                    {
-                        foreach (Piece piece in pieces)
-                        {
-                            if (((this.position.getY() - 1) == piece.getPos().getY()) && (endPos.getX() == piece.getPos().getX()))
+                            break;
+
+                        case 2:
+                            //check if first move and no diag
+                            if (this.isFirstMove && this.getPos().getX() == endPos.getX())
                             {
-                                return false;
+                                foreach (Piece piece in pieces)
+                                {
+                                    for (int i = this.getPos().getY() - 1; i >= endPos.getY(); i--)
+                                    {
+                                        if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == i)
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                }
+                                return true;
                             }
-                        }
-                        return true;
+                            break;
+
+                        default:
+                            return false;
                     }
                 }
+                return false;
             }
-            return false;
-        }
+        }	
     }
 }

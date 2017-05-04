@@ -79,6 +79,11 @@ namespace ChessIA
 						{
 							Piece needDelete = null;
 							Console.WriteLine("Déplacement valide.");
+                            if (piece.GetType() == typeof(Pawn))
+                            {
+                                Pawn pawn = (Pawn)piece;
+                                pawn._isFirstMove = false;
+                            }
 
 							// Vérification s'il s'agit d'une prise de pièce
 							foreach(Piece p in pieces)
