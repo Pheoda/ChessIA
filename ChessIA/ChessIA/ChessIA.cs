@@ -59,10 +59,13 @@ namespace ChessIA
 				else
 					labelTurn.Text = "Blanc";
 				board.refresh();
+
+				// Ajouter à la liste de coups les coordonnées x1;y1 -> x2;y2
+				listMoves.Items.Add("(" + x1 + ";" + y1 + ") -> (" + x2 + ";" + y2 + ")");
 			}
 			else
 			{
-				Console.WriteLine("Mouvement impossible");
+				labelError.Text = "Mouvement impossible";
 			}
 		}
 

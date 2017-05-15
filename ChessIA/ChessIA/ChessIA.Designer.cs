@@ -58,6 +58,10 @@ namespace ChessIA
 			this.label13 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
+			this.labelError = new System.Windows.Forms.Label();
+			this.label17 = new System.Windows.Forms.Label();
+			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.listMoves = new System.Windows.Forms.ListBox();
 			((System.ComponentModel.ISupportInitialize)(this.inputY1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputX1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputX2)).BeginInit();
@@ -479,11 +483,57 @@ namespace ChessIA
 			this.label15.Text = "3";
 			this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// labelError
+			// 
+			this.labelError.AutoSize = true;
+			this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelError.ForeColor = System.Drawing.Color.DarkRed;
+			this.labelError.Location = new System.Drawing.Point(35, 353);
+			this.labelError.Name = "labelError";
+			this.labelError.Size = new System.Drawing.Size(0, 25);
+			this.labelError.TabIndex = 14;
+			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label17.ForeColor = System.Drawing.Color.Black;
+			this.label17.Location = new System.Drawing.Point(883, 15);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(163, 25);
+			this.label17.TabIndex = 15;
+			this.label17.Text = "Liste des coups";
+			// 
+			// tableLayoutPanel3
+			// 
+			this.tableLayoutPanel3.ColumnCount = 2;
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel3.Location = new System.Drawing.Point(928, 118);
+			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+			this.tableLayoutPanel3.RowCount = 2;
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(8, 8);
+			this.tableLayoutPanel3.TabIndex = 16;
+			// 
+			// listMoves
+			// 
+			this.listMoves.FormattingEnabled = true;
+			this.listMoves.Location = new System.Drawing.Point(888, 43);
+			this.listMoves.Name = "listMoves";
+			this.listMoves.Size = new System.Drawing.Size(154, 511);
+			this.listMoves.TabIndex = 19;
+			// 
 			// ChessIA
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(897, 569);
+			this.ClientSize = new System.Drawing.Size(1054, 569);
+			this.Controls.Add(this.listMoves);
+			this.Controls.Add(this.tableLayoutPanel3);
+			this.Controls.Add(this.label17);
+			this.Controls.Add(this.labelError);
 			this.Controls.Add(this.tableLayoutPanel2);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.labelTurn);
@@ -542,6 +592,10 @@ namespace ChessIA
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label9;
-    }
+		private System.Windows.Forms.Label labelError;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+		private System.Windows.Forms.ListBox listMoves;
+	}
 }
 
