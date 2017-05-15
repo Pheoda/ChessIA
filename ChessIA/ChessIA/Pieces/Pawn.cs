@@ -147,6 +147,11 @@ namespace ChessIA
                 }
                 return false;
             }
-        }	
-    }
+        }
+
+		public override List<Move> possibleMoves(List<Piece> pieces)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

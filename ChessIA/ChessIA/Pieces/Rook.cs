@@ -107,7 +107,7 @@ namespace ChessIA
             {
                 return false;
             }
-            // regarde si à la position d'arrivé on a bien une piece de la couleur différente
+            // regarde si à la position d'arrivée on a bien une piece de la couleur différente
             foreach (Piece piece in pieces)
             {
                 if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack != piece.getIsBlack())
@@ -121,8 +121,12 @@ namespace ChessIA
 
             }
 
-            // Une tour peut bouger suivant un unique axe
             return true;
         }
-    }
+
+		public override List<Move> possibleMoves(List<Piece> pieces)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

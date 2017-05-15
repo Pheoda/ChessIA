@@ -82,5 +82,5 @@ namespace ChessIA
         {
             inputY2.Select(0, 1);
         }
-    }
+	}
 }

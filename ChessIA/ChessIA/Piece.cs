@@ -25,6 +25,9 @@ namespace ChessIA
 		// Bouge la piece a la position pos en effectuant les tests necessaires
 		public abstract bool canMove(Position endPos, List<Piece> pieces);
 
+        // Calcul tous les coups possibles
+        public abstract List<Move> possibleMoves(List<Piece> pieces);
+
 		public bool getIsBlack()
 		{
 			return isBlack;

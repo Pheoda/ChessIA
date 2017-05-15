@@ -66,7 +66,7 @@ namespace ChessIA
 			{
 				if (piece.getPos().getX() == startPos.getX() && piece.getPos().getY() == startPos.getY())
 				{
-					if (piece.getIsBlack() != this.turn) // On s'assure que la couleur jouee est bien la bonne
+					if (piece.getIsBlack() != this.turn) // On s'assure que la couleur jouée est bien la bonne
 					{
 						Console.WriteLine("Ce n'est pas à cette couleur de jouer !");
 						return false;
