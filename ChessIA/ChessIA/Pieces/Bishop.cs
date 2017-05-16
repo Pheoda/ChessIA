@@ -18,58 +18,55 @@ namespace ChessIA
 
 		public override bool canMove(Position endPos, List<Piece> pieces)
         {
-            if (Math.Abs(endPos.getX() - this.getPos().getX()) < 0 && Math.Abs(endPos.getY() - this.getPos().getY()) < 0)
-            {
-                foreach(Piece piece in pieces)
-                {
-                    if ((endPos.getX() - this.getPos().getX()) > 0 && (endPos.getY() - this.getPos().getY()) > 0)
-                    {
-                        for (int x = this.getPos().getX() + 1, y = this.getPos().getY() + 1; x < endPos.getX() && y < endPos.getY(); x++, y++)
-                        {
-                            if (piece.getPos().getY() == y && piece.getPos().getX() == x)
-                            {
-                                return false;
-                            }
-                        }
-                    }
-                    if ((endPos.getX() - this.getPos().getX()) < 0 && (endPos.getY() - this.getPos().getY()) > 0)
-                    {
-                        for (int x = this.getPos().getX() - 1, y = this.getPos().getY() + 1; x < endPos.getX() && y < endPos.getY(); x--, y++)
-                        {
-                            if (piece.getPos().getY() == y && piece.getPos().getX() == x)
-                            {
-                                return false;
-                            }
-                        }
-                    }
-                    if ((endPos.getX() - this.getPos().getX()) > 0 && (endPos.getY() - this.getPos().getY()) < 0)
-                    {
-                        for (int x = this.getPos().getX() + 1, y = this.getPos().getY() - 1; x < endPos.getX() && y < endPos.getY(); x++, y--)
-                        {
-                            if (piece.getPos().getY() == y && piece.getPos().getX() == x)
-                            {
-                                return false;
-                            }
-                        }
-                    }
-                    if ((endPos.getX() - this.getPos().getX()) < 0 && (endPos.getY() - this.getPos().getY()) < 0)
-                    {
-                        for (int x = this.getPos().getX() - 1, y = this.getPos().getY() - 1; x < endPos.getX() && y < endPos.getY(); x--, y--)
-                        {
-                            if (piece.getPos().getY() == y && piece.getPos().getX() == x)
-                            {
-                                return false;
-                            }
-                        }
-                    }
-                    if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack == piece.getIsBlack())
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
+			if (Math.Abs(this.getPos().getX() - endPos.getX()) == Math.Abs(this.getPos().getY() - endPos.getY())) // Déplacement en diagonal uniquement
+			{
+				// NORD (y-)
+				if (endPos.getY() < this.getPos().getY())
+					for (int y = 1; this.getPos().getY() - y > endPos.getY(); y++)
+					{
+						// NORD OUEST (- ; -)
+						if (endPos.getX() < this.getPos().getX())
+						{
+							if (this.collide(new Position(this.getPos().getX() - y, this.getPos().getY() - y), pieces))
+								return false;
+						}
+						// NORD EST (+ ; -)
+						else
+						{
+							if (this.collide(new Position(this.getPos().getX() + y, this.getPos().getY() - y), pieces))
+								return false;
+						}
+					}
+				// SUD (y+)
+				else
+					for (int y = 1; this.getPos().getY() + y < endPos.getY(); y++)
+					{
+						// SUD OUEST (- ; +)
+						if (endPos.getX() < this.getPos().getX())
+						{
+							if (this.collide(new Position(this.getPos().getX() - y, this.getPos().getY() + y), pieces))
+								return false;
+						}
+						// SUD EST (+ ; +)
+						else
+						{
+							if (this.collide(new Position(this.getPos().getX() + y, this.getPos().getY() + y), pieces))
+								return false;
+						}
+					}
+
+				// Pas de détection de pion sur le trajet
+				// Vérification de la couleur de la pièce sur la case d'arrivée
+				foreach (Piece piece in pieces)
+				{
+					if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY())
+						return this.isBlack != piece.getIsBlack();
+				}
+				// Case libre
+				return true;
+			}
+			else
+				return false; // Si déplacement pas diagonal
         }
 
 		public override List<Move> possibleMoves(List<Piece> pieces)

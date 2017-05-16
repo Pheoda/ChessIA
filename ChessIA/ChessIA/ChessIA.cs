@@ -34,7 +34,7 @@ namespace ChessIA
 					chessboard.Controls.Add(p, x, y);
 				}
 
-			board = new Chessboard(chessboard);
+			board = new Chessboard(chessboard, labelError);
         }
 
 		private void deplacementButton_Click(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace ChessIA
 
 			Console.WriteLine("Entree : {0}/{1} et {2}/{3}", x1, y1, x2, y2);
 
-			if (board.movePiece(new Position(x1, y1), new Position(x2, y2)))
+			if (board.movePiece(new Position(x1, y1), new Position(x2, y2))) // Mouvement possible
 			{
 				board.changeTurn();
 				if (board.getTurn()) // Tour noir
@@ -62,10 +62,6 @@ namespace ChessIA
 
 				// Ajouter à la liste de coups les coordonnées x1;y1 -> x2;y2
 				listMoves.Items.Add("(" + x1 + ";" + y1 + ") -> (" + x2 + ";" + y2 + ")");
-			}
-			else
-			{
-				labelError.Text = "Mouvement impossible";
 			}
 		}
 
