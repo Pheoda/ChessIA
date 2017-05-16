@@ -15,12 +15,14 @@ namespace ChessIA
 		private List<Piece> pieces;
 		private bool turn;
         private TableLayoutPanel layoutPanel;
+		private Label errorLabel;
 
 		public static int SIZE = 8;
 		
-        public Chessboard(TableLayoutPanel panel)
+        public Chessboard(TableLayoutPanel panel, Label label)
         {
             layoutPanel = panel;
+			errorLabel = label;
 
 			pieces = new List<Piece>();
 			pieces.Add(new Rook(new Position(0, 0), true, Properties.Resources.noir_tour));
