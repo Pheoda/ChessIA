@@ -11,11 +11,13 @@ namespace ChessIA
     class King : Piece
     {
 		private bool isFirstMove;
+		private bool inCheck;
 
 		public King(Position position, bool black, Image image)
 			: base(position, black, image)
         {
 			isFirstMove = true;
+			inCheck = false;
         }
 
 		public override bool canMove(Position endPos, List<Piece> pieces)
@@ -37,6 +39,18 @@ namespace ChessIA
             }
             return false;
         }
+
+		public bool _inCheck
+		{
+			get
+			{
+				return inCheck;
+			}
+			set
+			{
+				inCheck = value;
+			}
+		}
 
 		public override List<Move> possibleMoves(List<Piece> pieces)
 		{

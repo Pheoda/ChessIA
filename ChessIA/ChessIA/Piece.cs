@@ -44,7 +44,7 @@ namespace ChessIA
 		{
 			return this.image;
 		}
-		protected bool collide(Position pos, List<Piece> pieces) // Retourne s'il y a une pieces sur cette position
+		protected bool collide(Position pos, List<Piece> pieces) // Retourne s'il y a une pièce sur cette position
 		{
 			foreach (Piece piece in pieces)
 				if (piece.getPos().getX() == pos.getX() && piece.getPos().getY() == pos.getY())

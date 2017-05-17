@@ -27,8 +27,8 @@ namespace ChessIA
 			pieces = new List<Piece>();
 			pieces.Add(new Rook(new Position(0, 0), true, Properties.Resources.noir_tour));
 			pieces.Add(new Bishop(new Position(2, 0), true, Properties.Resources.noir_fou));
-			//pieces.Add(new King(new Position(4, 0), true, Properties.Resources.noir_roi));
-			//pieces.Add(new Knight(new Position(6, 0), true, Properties.Resources.noir_cavalier));
+			pieces.Add(new King(new Position(4, 0), true, Properties.Resources.noir_roi));
+			pieces.Add(new Knight(new Position(6, 0), true, Properties.Resources.noir_cavalier));
 
 			/*pieces.Add(new Pawn(new Position(1, 1), true, Properties.Resources.noir_pion));
 			pieces.Add(new Pawn(new Position(3, 1), true, Properties.Resources.noir_pion));
@@ -43,8 +43,8 @@ namespace ChessIA
 
 			pieces.Add(new Rook(new Position(0, 7), false, Properties.Resources.blanc_tour));
 			pieces.Add(new Bishop(new Position(2, 7), false, Properties.Resources.blanc_fou));
-			//pieces.Add(new King(new Position(4, 7), false, Properties.Resources.blanc_roi));
-			//pieces.Add(new Knight(new Position(6, 7), false, Properties.Resources.blanc_cavalier));
+			pieces.Add(new King(new Position(4, 7), false, Properties.Resources.blanc_roi));
+			pieces.Add(new Knight(new Position(6, 7), false, Properties.Resources.blanc_cavalier));
 
 			/*pieces.Add(new Pawn(new Position(1, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(3, 6), false, Properties.Resources.blanc_pion));
@@ -114,6 +114,17 @@ namespace ChessIA
 			this.errorLabel.Text = "Pièce non trouvée";
 			return false;
 		}
+		public void kingInCheck()
+		{
+			// Pour chaque roi trouvé, on regarde si une pièce d'une autre couleur peut se déplacer sur sa case
+			foreach(Piece piece in pieces)
+			{
+				if(piece.GetType() == typeof(King))
+				{
+
+				}
+			}
+		}
 		public void changeTurn()
 		{
 			this.turn = !this.turn;
@@ -125,12 +136,7 @@ namespace ChessIA
         public void refresh()
         {
             foreach(Piece p in pieces)
-            {
-				// Prends en compte le type de la pièce pour attribuer le sprite correspondant ?
-				// ......
-
 				layoutPanel.GetControlFromPosition(p.getPos().getX(), p.getPos().getY()).BackgroundImage = p.getImage();
-            }
         }
     }
 }

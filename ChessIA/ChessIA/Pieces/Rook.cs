@@ -24,16 +24,14 @@ namespace ChessIA
 
                 if (endPos.getY() > this.position.getY()) // y positif
                 {
-                    for (int i = this.position.getY() + 1; i < endPos.getY(); i++)
-                        foreach (Piece piece in pieces)
-                            if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == i)
-                                return false;
+					for (int i = this.position.getY() + 1; i < endPos.getY(); i++)
+						if (collide(new Position(endPos.getX(), i), pieces))
+							return false;
                 }
                 else	// y négatif
                 {
                     for (int i = this.position.getY() - 1; i > endPos.getY(); i--)
-                        foreach (Piece piece in pieces)
-                            if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == i)
+						if (collide(new Position(endPos.getX(), i), pieces))
                                 return false;
                 }
             }
@@ -44,15 +42,13 @@ namespace ChessIA
                 if (endPos.getX() > this.position.getX()) // x positif
                 {
                     for (int i = this.position.getX() + 1; i < endPos.getX(); i++)
-                        foreach (Piece piece in pieces)
-                            if (piece.getPos().getY() == endPos.getY() && piece.getPos().getX() == i)
+						if (collide(new Position(i, endPos.getY()), pieces))
                                 return false;
                 }
                 else	// x négatif
                 {
                     for (int i = this.position.getX() - 1; i > endPos.getX(); i--)
-                        foreach (Piece piece in pieces)
-                            if (piece.getPos().getY() == endPos.getY() && piece.getPos().getX() == i)
+						if (collide(new Position(i, endPos.getY()), pieces))
                                 return false;
                 }
             }
