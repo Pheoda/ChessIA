@@ -121,7 +121,13 @@ namespace ChessIA
 			{
 				if(piece.GetType() == typeof(King))
 				{
-
+                    foreach(Piece otherPiece in pieces)
+                    {
+                        if (piece.getIsBlack() != otherPiece.getIsBlack())
+                        {
+                            
+                        }
+                    }
 				}
 			}
 		}

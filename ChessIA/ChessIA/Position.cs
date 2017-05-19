@@ -25,5 +25,24 @@ namespace ChessIA
 		{
 			return y;
 		}
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+            if (typeof(Position) != obj.GetType())
+            {
+                return false;                
+            }
+            Position pos = (Position)obj;
+ 
+            return pos.getX() == this.getX() && pos.getY() == this.getY();
+        }
 	}
 }

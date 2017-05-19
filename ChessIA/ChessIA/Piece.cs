@@ -51,5 +51,7 @@ namespace ChessIA
 					return true;
 			return false;
 		}
+
+        
     }
 }

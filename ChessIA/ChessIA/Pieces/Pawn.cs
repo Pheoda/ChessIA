@@ -151,7 +151,43 @@ namespace ChessIA
 
 		public override List<Move> possibleMoves(List<Piece> pieces)
 		{
-			throw new NotImplementedException();
+            List<Move> validMove = new List<Move>();
+            Position pos2Try;
+
+            if (this.getIsBlack())
+	        {
+                pos2Try = new Position(this.getPos().getX(), this.getPos().getY() + 1);
+                if (canMove(pos2Try, pieces))
+                {
+                    validMove.Add(new Move(pos2Try, 0));
+                }
+                if (this._isFirstMove)
+                {
+                    pos2Try = new Position(this.getPos().getX(), this.getPos().getY() + 2);
+                    if (canMove(pos2Try, pieces))
+                    {
+                        validMove.Add(new Move(pos2Try, 0));
+                    }
+                }
+            }
+            else
+            {
+                pos2Try = new Position(this.getPos().getX(), this.getPos().getY() - 1);
+                if (canMove(pos2Try, pieces))
+                {
+                    validMove.Add(new Move(pos2Try, 0));
+                }
+                if (this._isFirstMove)
+                {
+                    pos2Try = new Position(this.getPos().getX(), this.getPos().getY() - 2);
+                    if (canMove(pos2Try, pieces))
+                    {
+                        validMove.Add(new Move(pos2Try, 0));
+                    }
+                }
+            }
+
+            return validMove;
 		}
 	}
 }

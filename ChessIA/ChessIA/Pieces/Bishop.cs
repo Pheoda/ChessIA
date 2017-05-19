@@ -71,6 +71,16 @@ namespace ChessIA
 
 		public override List<Move> possibleMoves(List<Piece> pieces)
 		{
+            List<Move> validMove = new List<Move>();
+            Position pos2Try;
+
+            for (int i = -1; i < length; i++)
+            {
+                for (int j = 0; j < length; j++)
+                {
+                    
+                }
+            }
 			throw new NotImplementedException();
 		}
 	}
