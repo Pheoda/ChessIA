@@ -40,6 +40,7 @@ namespace ChessIA
 
 		public override List<Move> possibleMoves(List<Piece> pieces)
 		{
+			// Reprendre algo de déplacement
 			throw new NotImplementedException();
 		}
 	}

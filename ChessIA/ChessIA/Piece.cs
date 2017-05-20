@@ -11,6 +11,13 @@ namespace ChessIA
 {
     abstract class Piece
     {
+		protected const double VALUE_EMPTY = 0;
+		protected const double VALUE_PAWN = 1;
+		protected const double VALUE_KNIGHT = 3.2;
+		protected const double VALUE_BISHOP = 3.33;
+		protected const double VALUE_ROOK = 5.1;
+		protected const double VALUE_KING = 99999;
+
 		protected Position position;
 		protected bool isBlack;
 		protected Image image;
@@ -50,6 +57,20 @@ namespace ChessIA
 				if (piece.getPos().getX() == pos.getX() && piece.getPos().getY() == pos.getY())
 					return true;
 			return false;
+		}
+		
+		protected double getValue(Piece p)
+		{
+			if (p.GetType() == typeof(Pawn))
+				return VALUE_PAWN;
+			else if (p.GetType() == typeof(Knight))
+				return VALUE_KNIGHT;
+			else if (p.GetType() == typeof(Bishop))
+				return VALUE_BISHOP;
+			else if (p.GetType() == typeof(Rook))
+				return VALUE_ROOK;
+			else // King
+				return VALUE_KING;
 		}
 
         

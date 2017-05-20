@@ -71,7 +71,94 @@ namespace ChessIA
 
 		public override List<Move> possibleMoves(List<Piece> pieces)
 		{
-			throw new NotImplementedException();
+			List<Move> validMoves = new List<Move>();
+			int x = this.getPos().getX();
+			int y = this.getPos().getY();
+
+			// NORD : y-
+			for (y = y - 1; y >= 0; y--)
+			{
+				if (collide(new Position(x, y), pieces))
+				{
+					// On regarde si on peut manger la pièce
+					foreach(Piece p in pieces)
+					{
+						if (p.getPos().getX() == x && p.getPos().getY() == y)
+						{
+							if (p.getIsBlack() != this.isBlack)
+								validMoves.Add(new Move(new Position(x, y), getValue(p)));
+							break;
+						}
+					}
+					break; // On sort une fois qu'on a atteint une pièce
+				}
+				else
+					validMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+			}
+			// SUD : y+
+			for (y = y + 1; y < Chessboard.SIZE; y++)
+			{
+				if (collide(new Position(x, y), pieces))
+				{
+					// On regarde si on peut manger la pièce
+					foreach (Piece p in pieces)
+					{
+						if (p.getPos().getX() == x && p.getPos().getY() == y)
+						{
+							if (p.getIsBlack() != this.isBlack)
+								validMoves.Add(new Move(new Position(x, y), getValue(p)));
+							break;
+						}
+					}
+					break; // On sort une fois qu'on a atteint une pièce
+				}
+				else
+					validMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+			}
+
+			// OUEST : x-
+			for (x = x - 1; x >= 0; x--)
+			{
+				if (collide(new Position(x, y), pieces))
+				{
+					// On regarde si on peut manger la pièce
+					foreach (Piece p in pieces)
+					{
+						if (p.getPos().getX() == x && p.getPos().getY() == y)
+						{
+							if (p.getIsBlack() != this.isBlack)
+								validMoves.Add(new Move(new Position(x, y), getValue(p)));
+							break;
+						}
+					}
+					break; // On sort une fois qu'on a atteint une pièce
+				}
+				else
+					validMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+			}
+
+			// EST : x+
+			for (x = x + 1; x < Chessboard.SIZE; x++)
+			{
+				if (collide(new Position(x, y), pieces))
+				{
+					// On regarde si on peut manger la pièce
+					foreach (Piece p in pieces)
+					{
+						if (p.getPos().getX() == x && p.getPos().getY() == y)
+						{
+							if (p.getIsBlack() != this.isBlack)
+								validMoves.Add(new Move(new Position(x, y), getValue(p)));
+							break;
+						}
+					}
+					break; // On sort une fois qu'on a atteint une pièce
+				}
+				else
+					validMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+			}
+
+			return validMoves;
 		}
 	}
 }

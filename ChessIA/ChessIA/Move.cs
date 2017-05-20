@@ -9,9 +9,9 @@ namespace ChessIA
     class Move
     {
         private Position position;
-        private int value;
+        private double value;
 		
-		public Move(Position position, int value)
+		public Move(Position position, double value)
 		{
 			this.position = position;
 			this.value = value;
@@ -21,7 +21,7 @@ namespace ChessIA
 		{
 			return position;
 		}
-		public int getValue()
+		public double getValue()
 		{
 			return value;
 		}
