@@ -72,91 +72,94 @@ namespace ChessIA
 		public override List<Move> possibleMoves(List<Piece> pieces)
 		{
 			List<Move> validMoves = new List<Move>();
-			int x = this.getPos().getX();
-			int y = this.getPos().getY();
+			int xPiece = this.getPos().getX();
+			int yPiece = this.getPos().getY();
 
 			// NORD : y-
-			for (y = y - 1; y >= 0; y--)
+			for (int y = yPiece - 1; y >= 0; y--)
 			{
-				if (collide(new Position(x, y), pieces))
+				if (collide(new Position(xPiece, y), pieces))
 				{
 					// On regarde si on peut manger la pièce
 					foreach(Piece p in pieces)
 					{
-						if (p.getPos().getX() == x && p.getPos().getY() == y)
+						if (p.getPos().getX() == xPiece && p.getPos().getY() == y)
 						{
 							if (p.getIsBlack() != this.isBlack)
-								validMoves.Add(new Move(new Position(x, y), getValue(p)));
+								validMoves.Add(new Move(new Position(xPiece, y), getValue(p)));
 							break;
 						}
 					}
 					break; // On sort une fois qu'on a atteint une pièce
 				}
 				else
-					validMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+					validMoves.Add(new Move(new Position(xPiece, y), VALUE_EMPTY));
 			}
 			// SUD : y+
-			for (y = y + 1; y < Chessboard.SIZE; y++)
+			for (int y = yPiece + 1; y < Chessboard.SIZE; y++)
 			{
-				if (collide(new Position(x, y), pieces))
+				if (collide(new Position(xPiece, y), pieces))
 				{
 					// On regarde si on peut manger la pièce
 					foreach (Piece p in pieces)
 					{
-						if (p.getPos().getX() == x && p.getPos().getY() == y)
+						if (p.getPos().getX() == xPiece && p.getPos().getY() == y)
 						{
 							if (p.getIsBlack() != this.isBlack)
-								validMoves.Add(new Move(new Position(x, y), getValue(p)));
+								validMoves.Add(new Move(new Position(xPiece, y), getValue(p)));
 							break;
 						}
 					}
 					break; // On sort une fois qu'on a atteint une pièce
 				}
 				else
-					validMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+					validMoves.Add(new Move(new Position(xPiece, y), VALUE_EMPTY));
 			}
 
 			// OUEST : x-
-			for (x = x - 1; x >= 0; x--)
+			for (int x = xPiece - 1; x >= 0; x--)
 			{
-				if (collide(new Position(x, y), pieces))
+				if (collide(new Position(x, yPiece), pieces))
 				{
 					// On regarde si on peut manger la pièce
 					foreach (Piece p in pieces)
 					{
-						if (p.getPos().getX() == x && p.getPos().getY() == y)
+						if (p.getPos().getX() == x && p.getPos().getY() == yPiece)
 						{
 							if (p.getIsBlack() != this.isBlack)
-								validMoves.Add(new Move(new Position(x, y), getValue(p)));
+								validMoves.Add(new Move(new Position(x, yPiece), getValue(p)));
 							break;
 						}
 					}
 					break; // On sort une fois qu'on a atteint une pièce
 				}
 				else
-					validMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+					validMoves.Add(new Move(new Position(x, yPiece), VALUE_EMPTY));
 			}
 
 			// EST : x+
-			for (x = x + 1; x < Chessboard.SIZE; x++)
+			for (int x = xPiece + 1; x < Chessboard.SIZE; x++)
 			{
-				if (collide(new Position(x, y), pieces))
+				if (collide(new Position(x, yPiece), pieces))
 				{
 					// On regarde si on peut manger la pièce
 					foreach (Piece p in pieces)
 					{
-						if (p.getPos().getX() == x && p.getPos().getY() == y)
+						if (p.getPos().getX() == x && p.getPos().getY() == yPiece)
 						{
 							if (p.getIsBlack() != this.isBlack)
-								validMoves.Add(new Move(new Position(x, y), getValue(p)));
+								validMoves.Add(new Move(new Position(x, yPiece), getValue(p)));
 							break;
 						}
 					}
 					break; // On sort une fois qu'on a atteint une pièce
 				}
 				else
-					validMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+					validMoves.Add(new Move(new Position(x, yPiece), VALUE_EMPTY));
 			}
+
+			foreach(Move m in validMoves)
+				Console.WriteLine(m.getPosition().getX() + " | " + m.getPosition().getY() + " -> " + m.getValue());
 
 			return validMoves;
 		}

@@ -74,9 +74,9 @@ namespace ChessIA
             List<Move> validMove = new List<Move>();
             Position pos2Try;
 
-            for (int i = -1; i < length; i++)
+            for (int i = -1; i < Chessboard.SIZE; i++)
             {
-                for (int j = 0; j < length; j++)
+                for (int j = 0; j < Chessboard.SIZE; j++)
                 {
                     
                 }

@@ -64,7 +64,7 @@ namespace ChessIA
 		// Bouge la piece si possible suivant la saisie clavier precedente
 		public bool movePiece(Position startPos, Position endPos)
 		{
-			foreach(Piece piece in pieces)
+			foreach (Piece piece in pieces)
 			{
 				if (piece.getPos().getX() == startPos.getX() && piece.getPos().getY() == startPos.getY())
 				{
@@ -75,6 +75,13 @@ namespace ChessIA
 					}
 					else // Si le déplacement est correct, on déplace ou on mange la pièce ciblée
 					{
+						// POUR TESTER FONCTION DE VALIDMOVES
+						/*if (piece.GetType() == typeof(Rook))
+						{
+							List<Move> m = new List<Move>();
+							m = piece.possibleMoves(pieces);
+						}*/
+
 						bool pieceMoved = piece.canMove(endPos, this.pieces);
 
 						if (pieceMoved) // Déplacement valide
@@ -116,19 +123,10 @@ namespace ChessIA
 		}
 		public void kingInCheck()
 		{
-			// Pour chaque roi trouvé, on regarde si une pièce d'une autre couleur peut se déplacer sur sa case
+			// Pour pièce, on regarde si la valeur du roi est détectée dans les mouvements possibles
 			foreach(Piece piece in pieces)
 			{
-				if(piece.GetType() == typeof(King))
-				{
-                    foreach(Piece otherPiece in pieces)
-                    {
-                        if (piece.getIsBlack() != otherPiece.getIsBlack())
-                        {
-                            
-                        }
-                    }
-				}
+				
 			}
 		}
 		public void changeTurn()
