@@ -158,9 +158,6 @@ namespace ChessIA
 					validMoves.Add(new Move(new Position(x, yPiece), VALUE_EMPTY));
 			}
 
-			foreach(Move m in validMoves)
-				Console.WriteLine(m.getPosition().getX() + " | " + m.getPosition().getY() + " -> " + m.getValue());
-
 			return validMoves;
 		}
 	}

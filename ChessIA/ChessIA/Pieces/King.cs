@@ -55,17 +55,21 @@ namespace ChessIA
 		public override List<Move> possibleMoves(List<Piece> pieces)
 		{
             List<Move> validMove = new List<Move>();
-            Position pos2Try;
+			int x, y;
 
             for (int i = -1; i < 2; i++)
 			{
 			    for (int j = -1; j < 2; j++)
 			    {
-                    pos2Try = new Position(this.getPos().getX() + i, this.getPos().getY() + j);
-                    if (!pos2Try.Equals(this.getPos()) && canMove(pos2Try, pieces))
-                    {
-                        validMove.Add(new Move(pos2Try, 0));
-                    }
+					if (i != 0 || j != 0)
+					{
+						x = this.getPos().getX() + i;
+						y = this.getPos().getY() + j;
+						if(x >= 0 && y >= 0 && x < Chessboard.SIZE && y < Chessboard.SIZE)
+							if (canMove(new Position(x, y), pieces))
+								//if(!(collide(new Position(x, y), pieces) && )) // Compléter pour getValue()
+									validMove.Add(new Move(new Position(x, y), 0));
+					}
 			    }
 			}
             return validMove;
