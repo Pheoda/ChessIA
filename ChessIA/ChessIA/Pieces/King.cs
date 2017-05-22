@@ -65,10 +65,21 @@ namespace ChessIA
 					{
 						x = this.getPos().getX() + i;
 						y = this.getPos().getY() + j;
-						if(x >= 0 && y >= 0 && x < Chessboard.SIZE && y < Chessboard.SIZE)
-							if (canMove(new Position(x, y), pieces))
-								//if(!(collide(new Position(x, y), pieces) && )) // Compléter pour getValue()
-									validMove.Add(new Move(new Position(x, y), 0));
+                        if (x >= 0 && y >= 0 && x < Chessboard.SIZE && y < Chessboard.SIZE)
+                        {
+                            if (!(collide(new Position(x, y), pieces)))
+                            {
+                                validMove.Add(new Move(new Position(x, y), VALUE_EMPTY));
+                                continue;
+                            }
+                            foreach (Piece piece in pieces)
+                            {
+                                if (piece.getPos().Equals(new Position(x, y)) && this.isBlack != piece.getIsBlack())
+                                {
+                                    validMove.Add(new Move(new Position(x, y), getValue(piece)));
+                                }
+                            }
+                        }
 					}
 			    }
 			}

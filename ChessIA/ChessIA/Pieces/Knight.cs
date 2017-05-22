@@ -40,8 +40,38 @@ namespace ChessIA
 
 		public override List<Move> possibleMoves(List<Piece> pieces)
 		{
-			// Reprendre algo de déplacement
-			throw new NotImplementedException();
-		}
+            List<Move> validMove = new List<Move>();
+            List<Position> allPos = new List<Position>();
+            int x, y;
+
+            //On place toutes les positions possibles dans une liste
+            for (int i = -2; i < 3; i++)
+            {
+                for (int j = -2; i < 3; j++)
+                {
+                    x = this.getPos().getX() + i;
+                    y = this.getPos().getY() + j;
+
+                    int dist = (x - this.getPos().getX()) * (x - this.getPos().getX()) + (y - this.getPos().getY()) * (y - this.getPos().getY());
+                    if (dist == 5)
+                    {
+                        allPos.Add(new Position(x, y));
+                    }
+                }
+            }
+
+            foreach (Position pos2Test in allPos)
+            {
+                foreach (Piece piece in pieces)
+                {
+                    if (pos2Test.Equals(piece.getPos()) && piece.getIsBlack() != this.isBlack)
+                    {
+                        validMove.Add(new Move(pos2Test, getValue(piece)));
+                    }
+                }
+                validMove.Add(new Move(pos2Test, VALUE_EMPTY));
+            }
+            return validMove;
+    	}
 	}
 }
