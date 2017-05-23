@@ -27,10 +27,6 @@ namespace ChessIA
                 isFirstMove = value;
             }
         }
-        /*public override bool canMove(Position endPos, List<Piece> pieces)
-        {
-            
-        }*/
 		
 		public override void setPossibleMoves(List<Piece> pieces)
 		{
@@ -72,25 +68,23 @@ namespace ChessIA
                     int x = this.getPos().getX() + i;
                     int y = this.getPos().getY() + j;
 
-                    if ((j > 0 && !this.isBlack) || (j < 0 && this.isBlack))
-                        continue;
-    
-                    foreach (Piece piece in pieces)
-                    {
-                        if (piece.getPos().Equals(new Position(x, y)) && this.isBlack != piece.getIsBlack())
-                        {
-                            if (j < 0 && !this.isBlack)
-                            {
-                                this.possibleMoves.Add(new Move(new Position(x, y), getValue(piece)));
-                                break;
-                            }
-                            else if (j > 0 && this.isBlack)
-                            {
-                                this.possibleMoves.Add(new Move(new Position(x, y), getValue(piece)));
-                                break;
-                            }
-                        }
-                    }
+                    if (!((j > 0 && !this.isBlack) || (j < 0 && this.isBlack)))
+						foreach (Piece piece in pieces)
+						{
+							if (piece.getPos().Equals(new Position(x, y)) && this.isBlack != piece.getIsBlack())
+							{
+								if (j < 0 && !this.isBlack)
+								{
+									this.possibleMoves.Add(new Move(new Position(x, y), getValue(piece)));
+									break;
+								}
+								else if (j > 0 && this.isBlack)
+								{
+									this.possibleMoves.Add(new Move(new Position(x, y), getValue(piece)));
+									break;
+								}
+							}
+						}
                 }
             }
 		}

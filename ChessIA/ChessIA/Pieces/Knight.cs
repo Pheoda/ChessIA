@@ -16,28 +16,6 @@ namespace ChessIA
 
         }
 
-		/*public override bool canMove(Position endPos, List<Piece> pieces)
-        {
-            int dist = (endPos.getX() - this.getPos().getX()) * (endPos.getX() - this.getPos().getX()) + (endPos.getY() - this.getPos().getY()) * (endPos.getY() - this.getPos().getY());
-            if (dist == 5)
-            {
-
-                foreach (Piece piece in pieces)
-                {
-                    if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack != piece.getIsBlack())
-                    {
-                        return true;
-                    }
-                    if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack == piece.getIsBlack())
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
-        }*/
-
 		public override void setPossibleMoves(List<Piece> pieces)
 		{
 			possibleMoves.Clear();
