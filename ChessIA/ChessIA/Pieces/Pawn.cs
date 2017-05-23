@@ -51,7 +51,6 @@ namespace ChessIA
                     {
                         this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
                     }
-                    continue;
                 }
                 else
                 {
@@ -61,6 +60,10 @@ namespace ChessIA
                     {
                         this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
                     }
+                }
+                if (this.possibleMoves.Count == 0)
+                {
+                    break;
                 }
             }
 

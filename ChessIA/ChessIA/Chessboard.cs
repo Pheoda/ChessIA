@@ -66,7 +66,7 @@ namespace ChessIA
 		{
 			foreach (Piece piece in pieces)
 			{
-				if (piece.getPos().getX() == startPos.getX() && piece.getPos().getY() == startPos.getY())
+				if (piece.getPos().Equals(startPos))
 				{
 					refresh();
 					// POUR TESTER FONCTION DE VALIDMOVES
