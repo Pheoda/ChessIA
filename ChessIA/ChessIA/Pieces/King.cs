@@ -10,24 +10,30 @@ namespace ChessIA
 {
     class King : Piece
     {
-		private bool isFirstMove;
-		private bool inCheck;
-
 		public King(Position position, bool black, Image image)
 			: base(position, black, image)
         {
-			isFirstMove = true;
-			inCheck = false;
+
         }
 
 		public bool getInCheck(List<Piece> pieces)
 		{
 			int x = this.getPos().getX(), y = this.getPos().getY();
+			/*Console.WriteLine();
+			Console.WriteLine("=======CHECK=======");
+			Console.WriteLine(x + "/" + y);*/
 			foreach(Piece p in pieces)
 			{
-				if(p.getIsBlack() != this.getIsBlack() && p.GetType() != typeof(King)) // Si une pièce adverse différente du roi
+				if (p.getIsBlack() != this.getIsBlack() && p.GetType() != typeof(King)) // Si une pièce adverse différente du roi
+				{
+					/*Console.WriteLine("====PIECE====");
+					Console.WriteLine(p.getPos().getX() + "/" + p.getPos().getY());*/
 					if (p.canMove(new Position(x, y), pieces)) // Peut aller à la position du roi
+					{
+						//Console.WriteLine("^-POSITION D'ECHEC");
 						return true;							// On a une position d'échec
+					}
+				}
 			}
 
 			return false;
@@ -62,11 +68,15 @@ namespace ChessIA
 			x = this.getPos().getX();
 			y = this.getPos().getY();
 			// On enlève les positions où le roi est en échec
+			/*Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("=============================================================================");*/
 			for(int i = 0; i < possibleMoves.Count; i++)
 			{
 				this.setPos(possibleMoves[i].getPosition());
 				if (this.getInCheck(pieces))
-					possibleMoves.Remove(possibleMoves[i]);
+					possibleMoves.Remove(possibleMoves[i--]);
 			}
 			this.setPos(new Position(x, y));
 		}

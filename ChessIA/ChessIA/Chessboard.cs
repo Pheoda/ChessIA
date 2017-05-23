@@ -101,6 +101,7 @@ namespace ChessIA
 
 						// On déplace la pièce à la position finale
 						piece.setPos(endPos);
+						updatePossibleMoves(pieces); // MAJ des mouvements possibles
 					}
 
 					return pieceMoved;
@@ -141,6 +142,12 @@ namespace ChessIA
 						return (King)p;
 			}
 			return null;
+		}
+
+		public void updatePossibleMoves(List<Piece> pieces)
+		{
+			foreach(Piece p in pieces)
+				p.setPossibleMoves(pieces);
 		}
 
         public void refresh()
