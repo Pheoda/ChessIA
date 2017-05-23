@@ -54,8 +54,9 @@ namespace ChessIA
         }
         public double minMax(Move node, Piece p, List<Piece> pieces, int depth)
         {
-            Position oldPos = p.getPos();
-            p.setPos(node.getPosition());
+           // Piece oldPiece = p;
+            //p.setPos(node.getPosition());
+
 
             if (depth == 0) //or Last node
             {
@@ -72,9 +73,14 @@ namespace ChessIA
                     {
                         foreach (Move nodeChild in p.getPossibleMoves())
                         {
+                           Position oldPosOppo = pieceOppo.getPos();
+                           pieceOppo.setPos(nodeChild.getPosition());
+
                             double value = minMax(nodeChild, pieceOppo, pieces, depth - 1);
-                            bestValue = min(bestValue, value);
-                            p.setPos(oldPos);
+                            bestValue = max(bestValue, value);
+                            //Console.WriteLine("white : " + oldPosOppo.getX() + ", " + oldPosOppo.getY());
+
+                            pieceOppo.setPos(oldPosOppo);
                         }
                     }
                 }
@@ -84,21 +90,24 @@ namespace ChessIA
             else
             {
                 double bestValue = 10000;
-                foreach (Piece pieceOppo in pieces)
+                foreach (Piece pieceAI in pieces)
                 {
-                    if (pieceOppo.getIsBlack())
+                    if (pieceAI.getIsBlack())
                     {
                         foreach (Move nodeChild in p.getPossibleMoves())
                         {
-                            //Position 
-                            double value = minMax(nodeChild, pieceOppo, pieces, depth - 1);
-                            bestValue = max(bestValue, value);
-                            p.setPos(oldPos);
+                            Position oldPosAI = pieceAI.getPos();
+                            pieceAI.setPos(nodeChild.getPosition());
+
+                            double value = minMax(nodeChild, pieceAI, pieces, depth - 1);
+                            //Console.WriteLine("black : " + oldPosAI.getX() + ", " + oldPosAI.getY());
+                            bestValue = min(bestValue, value);
+                            pieceAI.setPos(oldPosAI);
                         }
                     }
                 }
+                return bestValue;
             }
-            return 0;
         }
 
         private double min(double bestValue, double value)

@@ -135,9 +135,7 @@ namespace ChessIA
 
             // On déplace la pièce à la position finale
             piece.setPos(move.getPosition());
-            Console.WriteLine("UPDATE");
             updatePossibleMoves(); // MAJ des mouvements possibles
-            Console.WriteLine("FIN UPDATE");
         }
 
 		public void changeTurn()

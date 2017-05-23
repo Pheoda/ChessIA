@@ -16,7 +16,7 @@ namespace ChessIA
 		private bool selected;
 		private Position startPos;
 
-        public const int DEPTH = 1;
+        public const int DEPTH = 4;
 
         public ChessIA()
         {
