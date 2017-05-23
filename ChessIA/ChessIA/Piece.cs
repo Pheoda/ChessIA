@@ -39,15 +39,20 @@ namespace ChessIA
 		{
 			setPossibleMoves(pieces); // MAJ de la liste des mouvements possibles
 
-			foreach (Move m in this.possibleMoves)
-				if (m.getPosition().getX() == endPos.getX() && m.getPosition().getY() == endPos.getY())
-					return true;
-
-			return false;
+			return isPositionPossible(endPos);
 		}
 
         // Calcul tous les coups possibles de la pièce
         public abstract void setPossibleMoves(List<Piece> pieces);
+
+		public bool isPositionPossible(Position pos)
+		{
+			foreach (Move m in this.possibleMoves)
+				if (m.getPosition().getX() == pos.getX() && m.getPosition().getY() == pos.getY())
+					return true;
+
+			return false;
+		}
 
 		public List<Move> getPossibleMoves()
 		{
