@@ -22,18 +22,21 @@ namespace ChessIA
 		protected bool isBlack;
 		protected Image image;
 
+		protected List<Move> possibleMoves;
+
 		public Piece(Position position, bool black, Image image)
 		{
 			this.position = position;
 			this.isBlack = black;
 			this.image = image;
+			this.possibleMoves = new List<Move>();
 		}
 
 		// Bouge la piece a la position pos en effectuant les tests necessaires
 		public abstract bool canMove(Position endPos, List<Piece> pieces);
 
-        // Calcul tous les coups possibles
-        public abstract List<Move> possibleMoves(List<Piece> pieces);
+        // Calcul tous les coups possibles de la pièce
+        public abstract List<Move> setPossibleMoves(List<Piece> pieces);
 
 		public bool getIsBlack()
 		{
@@ -51,6 +54,7 @@ namespace ChessIA
 		{
 			return this.image;
 		}
+
 		protected bool collide(Position pos, List<Piece> pieces) // Retourne s'il y a une pièce sur cette position
 		{
 			foreach (Piece piece in pieces)
@@ -72,7 +76,5 @@ namespace ChessIA
 			else // King
 				return VALUE_KING;
 		}
-
-        
     }
 }

@@ -69,7 +69,7 @@ namespace ChessIA
             return true;
         }
 
-		public override List<Move> possibleMoves(List<Piece> pieces)
+		public override List<Move> setPossibleMoves(List<Piece> pieces)
 		{
 			List<Move> validMoves = new List<Move>();
 			int xPiece = this.getPos().getX();

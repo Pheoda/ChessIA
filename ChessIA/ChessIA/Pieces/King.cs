@@ -52,7 +52,7 @@ namespace ChessIA
 			}
 		}
 
-		public override List<Move> possibleMoves(List<Piece> pieces)
+		public override List<Move> setPossibleMoves(List<Piece> pieces)
 		{
             List<Move> validMove = new List<Move>();
 			int x, y;
