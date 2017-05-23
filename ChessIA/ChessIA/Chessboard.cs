@@ -16,6 +16,8 @@ namespace ChessIA
 		private bool turn;
         private TableLayoutPanel layoutPanel;
 
+        private AI chessAI;
+
 		public static int SIZE = 8;
 		
         public Chessboard(TableLayoutPanel panel)
@@ -55,6 +57,8 @@ namespace ChessIA
 			pieces.Add(new Pawn(new Position(6, 5), false, Properties.Resources.blanc_pion));
 
 			turn = false; // Tour des blancs au démarrage
+
+            chessAI = new AI();
 
 			refresh();
         }
@@ -97,9 +101,6 @@ namespace ChessIA
 						if (needDelete != null) // Si on a mangé une pièce, on la supprime de la liste
 							pieces.Remove(needDelete);
 
-						// Suppression sprite sur l'ancienne case
-						layoutPanel.GetControlFromPosition(piece.getPos().getX(), piece.getPos().getY()).BackgroundImage = null;
-
 						// On déplace la pièce à la position finale
 						piece.setPos(endPos);
 						updatePossibleMoves(pieces); // MAJ des mouvements possibles
@@ -111,6 +112,34 @@ namespace ChessIA
 			return false;
 		}
 
+        public void movePiece(Piece piece, Move move)
+        {
+            Piece needDelete = null;
+
+            if (piece.GetType() == typeof(Pawn))
+            {
+                Pawn pawn = (Pawn)piece;
+                pawn._isFirstMove = false;
+            }
+
+            // Vérification s'il s'agit d'une prise de pièce
+            foreach (Piece p in pieces)
+            {
+                if (p.getPos().Equals(move.getPosition())) // On mange
+                {
+                    needDelete = p;
+                }
+            }
+            if (needDelete != null) // Si on a mangé une pièce, on la supprime de la liste
+                pieces.Remove(needDelete);
+
+            // On déplace la pièce à la position finale
+            piece.setPos(move.getPosition());
+            Console.WriteLine("UPDATE");
+            updatePossibleMoves(pieces); // MAJ des mouvements possibles
+            Console.WriteLine("FIN UPDATE");
+        }
+
 		public void changeTurn()
 		{
 			this.turn = !this.turn;
@@ -119,6 +148,11 @@ namespace ChessIA
 		{
 			return this.turn;
 		}
+
+        public AI getAI()
+        {
+            return chessAI;
+        }
 
 		public List<Piece> getPieces()
 		{
@@ -133,6 +167,17 @@ namespace ChessIA
 					return piece;
 			return null;
 		}
+
+        public void check(Label labelCheck)
+        {
+            if (findKing(getTurn()).getInCheck(getPieces())) // TEST NOIR
+            {
+                if (getTurn())
+                    labelCheck.Text = "NOIR en échec";
+                else
+                    labelCheck.Text = "BLANC en échec";
+            }
+        }
 
 		public King findKing(bool isBlack)
 		{
@@ -154,11 +199,15 @@ namespace ChessIA
         public void refresh()
         {
 			for (int x = 0; x < Chessboard.SIZE; x++)
-				for (int y = 0; y < Chessboard.SIZE; y++ )
-					if ((x + y) % 2 == 0)
-						layoutPanel.GetControlFromPosition(x, y).BackColor = Color.WhiteSmoke;
-					else
-						layoutPanel.GetControlFromPosition(x, y).BackColor = Color.Brown;
+                for (int y = 0; y < Chessboard.SIZE; y++)
+                {
+                    if ((x + y) % 2 == 0)
+                        layoutPanel.GetControlFromPosition(x, y).BackColor = Color.WhiteSmoke;
+                    else
+                        layoutPanel.GetControlFromPosition(x, y).BackColor = Color.Brown;
+
+                    layoutPanel.GetControlFromPosition(x, y).BackgroundImage = null;
+                }
 
             foreach(Piece p in pieces)
 				layoutPanel.GetControlFromPosition(p.getPos().getX(), p.getPos().getY()).BackgroundImage = p.getImage();

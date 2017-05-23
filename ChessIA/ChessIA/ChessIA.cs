@@ -16,6 +16,8 @@ namespace ChessIA
 		private bool selected;
 		private Position startPos;
 
+        public const int DEPTH = 1;
+
         public ChessIA()
         {
 			InitializeComponent();
@@ -45,50 +47,61 @@ namespace ChessIA
 
 			Piece pieceSelected = board.getPiece(p);
 
-			if(!selected)
-			{
-				if (pieceSelected != null && pieceSelected.getIsBlack() == board.getTurn()) // Si on a cliqué sur une case contenant une pièce
-				{
-					selected = true;
-					((Panel)sender).BackColor = Color.SpringGreen;
-					startPos = p;
-					pieceSelected.displayPossibleMoves(board.getPieces(), chessboard);
-				}
-			}
-			else
-			{
-				if(board.movePiece(startPos, p))
-				{
-					labelCheck.Text = "";
+            Console.WriteLine("Nombre : " + board.getPieces().Count);
+            for (int i = 0; i < board.getPieces().Count; i++)
+                Console.WriteLine("Pos : " + board.getPieces()[i].getPos().getX() + "/" + board.getPieces()[i].getPos().getY());
 
-					board.changeTurn();
-					if (board.getTurn()) // Tour noir
-						labelTurn.Text = "Noir";
-					else
-						labelTurn.Text = "Blanc";
-					board.refresh();
+                if (!selected)
+                {
+                    if (pieceSelected != null && pieceSelected.getIsBlack() == board.getTurn()) // Si on a cliqué sur une case contenant une pièce
+                    {
+                        selected = true;
+                        ((Panel)sender).BackColor = Color.SpringGreen;
+                        startPos = p;
+                        pieceSelected.displayPossibleMoves(board.getPieces(), chessboard);
+                    }
+                    else if (pieceSelected == null)
+                        Console.WriteLine("Piece nulle");
+                    else
+                        Console.WriteLine("Pas ton tour");
+                }
+                else
+                {
+                    if (board.movePiece(startPos, p))
+                    {
+                        labelCheck.Text = "";
 
-					if (board.findKing(true).getInCheck(board.getPieces())) // TEST NOIR
-					{
-						labelCheck.Text = "NOIR  ";
-					}
-					if (board.findKing(false).getInCheck(board.getPieces())) // TEST BLANC
-					{
-						labelCheck.Text += "BLANC";
-					}
-					// Ajouter à la liste de coups les coordonnées x1;y1 -> x2;y2
-					listMoves.Items.Add("(" + startPos.getX() + ";" + startPos.getY() + ") -> (" + p.getX() + ";" + p.getY() + ")");
-					
-					// Réinitialisation
-					selected = false;
-				}
-				else if (pieceSelected != null && pieceSelected.getIsBlack() == board.getTurn()) // Sélection d'une autre pièce alors qu'on a déjà une pièce sélectionnée
-				{
-					((Panel)sender).BackColor = Color.SpringGreen;
-					startPos = p;
-					pieceSelected.displayPossibleMoves(board.getPieces(), chessboard);
-				}
-			}
+                        board.changeTurn();
+
+                        board.refresh();
+
+                        board.check(labelCheck);
+
+                        // Ajouter à la liste de coups les coordonnées x1;y1 -> x2;y2
+                        listMoves.Items.Add("(" + startPos.getX() + ";" + startPos.getY() + ") -> (" + p.getX() + ";" + p.getY() + ")");
+
+                        if (board.getTurn()) // Tour noir = tour de l'IA
+                        {
+                            // Jeu de l'IA
+                            board.getAI().play(board.getPieces(), DEPTH);
+                            listMoves.Items.Add("(" + board.getAI().Piece.getPos().getX() + ";" + board.getAI().Piece.getPos().getY()
+                                + ") -> (" + board.getAI().Node.getPosition().getX() + ";" + board.getAI().Node.getPosition().getY() + ")");
+                            board.movePiece(board.getAI().Piece, board.getAI().Node);
+                            board.refresh();
+                            board.changeTurn();
+                            board.check(labelCheck);
+                        }
+
+                        // Réinitialisation
+                        selected = false;
+                    }
+                    else if (pieceSelected != null && pieceSelected.getIsBlack() == board.getTurn()) // Sélection d'une autre pièce alors qu'on a déjà une pièce sélectionnée
+                    {
+                        ((Panel)sender).BackColor = Color.SpringGreen;
+                        startPos = p;
+                        pieceSelected.displayPossibleMoves(board.getPieces(), chessboard);
+                    }
+                }
 		}
 	}
 }

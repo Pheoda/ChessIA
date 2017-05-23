@@ -6,37 +6,63 @@ using System.Threading.Tasks;
 
 namespace ChessIA
 {
-    class IA
+    class AI
     {
-        public IA ()
+        private Piece piece;
+        private Move node;
+        public Piece Piece 
         {
+            get
+            {
+                return this.piece;
+            }
         }
-
+        public Move Node 
+        {
+            get
+            {
+                return this.node;
+            }
+        }
         public void play(List<Piece> pieces, int depth)
         {
-            foreach (Piece piece in pieces)
+            double max = 0;
+
+            foreach (Piece p in pieces)
             {
-                if (piece.getIsBlack())
+                if (p.getIsBlack())
                 {
-                    foreach (Move node in piece.getPossibleMoves())
+                    foreach (Move node in p.getPossibleMoves())
                     {
-                        double value = minMax(node, piece, pieces, depth);
+                        double value = minMax(node, p, pieces, depth);
+                        if (value >= max)
+                        {
+                            max = value;
+                            this.node = node;
+                            this.piece = p;
+                        }
                     }
                 }
             }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("IA");
+            Console.WriteLine("Nombre : " + pieces.Count);
+            for (int i = 0; i < pieces.Count; i++)
+                Console.WriteLine("Pos : " + pieces[i].getPos().getX() + "/" + pieces[i].getPos().getY());
+
         }
-        public double minMax(Move node, Piece piece, List<Piece> pieces, int depth)
+        public double minMax(Move node, Piece p, List<Piece> pieces, int depth)
         {
-            Position oldPos = piece.getPos();
-            piece.setPos(node.getPosition());
+            Position oldPos = p.getPos();
+            p.setPos(node.getPosition());
 
             if (depth == 0) //or Last node
             {
-                piece.setPos(oldPos);
                 return node.getValue();
             }
 
-            if (piece.getIsBlack())
+            if (p.getIsBlack())
             {
                 double bestValue = -10000;
 
@@ -44,10 +70,11 @@ namespace ChessIA
                 {
                     if (!pieceOppo.getIsBlack())
                     {
-                        foreach (Move nodeChild in piece.getPossibleMoves())
+                        foreach (Move nodeChild in p.getPossibleMoves())
                         {
                             double value = minMax(nodeChild, pieceOppo, pieces, depth - 1);
-                            bestValue = max(bestValue, value);
+                            bestValue = min(bestValue, value);
+                            p.setPos(oldPos);
                         }
                     }
                 }
@@ -59,12 +86,14 @@ namespace ChessIA
                 double bestValue = 10000;
                 foreach (Piece pieceOppo in pieces)
                 {
-                    if (!pieceOppo.getIsBlack())
+                    if (pieceOppo.getIsBlack())
                     {
-                        foreach (Move nodeChild in piece.getPossibleMoves())
+                        foreach (Move nodeChild in p.getPossibleMoves())
                         {
+                            //Position 
                             double value = minMax(nodeChild, pieceOppo, pieces, depth - 1);
-                            bestValue = min(bestValue, value);
+                            bestValue = max(bestValue, value);
+                            p.setPos(oldPos);
                         }
                     }
                 }
