@@ -50,7 +50,7 @@ namespace ChessIA
 				if (pieceSelected != null && pieceSelected.getIsBlack() == board.getTurn()) // Si on a cliqué sur une case contenant une pièce
 				{
 					selected = true;
-					((Panel)sender).BackColor = Color.DeepSkyBlue;
+					((Panel)sender).BackColor = Color.SpringGreen;
 					startPos = p;
 					pieceSelected.displayPossibleMoves(board.getPieces(), chessboard);
 				}
@@ -84,7 +84,7 @@ namespace ChessIA
 				}
 				else if (pieceSelected != null && pieceSelected.getIsBlack() == board.getTurn()) // Sélection d'une autre pièce alors qu'on a déjà une pièce sélectionnée
 				{
-					((Panel)sender).BackColor = Color.DeepSkyBlue;
+					((Panel)sender).BackColor = Color.SpringGreen;
 					startPos = p;
 					pieceSelected.displayPossibleMoves(board.getPieces(), chessboard);
 				}

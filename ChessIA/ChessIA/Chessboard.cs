@@ -44,7 +44,7 @@ namespace ChessIA
 			pieces.Add(new King(new Position(4, 7), false, Properties.Resources.blanc_roi));
 			pieces.Add(new Knight(new Position(6, 7), false, Properties.Resources.blanc_cavalier));
 
-			pieces.Add(new Pawn(new Position(1, 3), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(1, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(3, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(5, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(7, 6), false, Properties.Resources.blanc_pion));
