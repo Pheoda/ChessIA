@@ -30,7 +30,7 @@ namespace ChessIA
 			pieces.Add(new King(new Position(4, 0), true, Properties.Resources.noir_roi));
 			pieces.Add(new Knight(new Position(6, 0), true, Properties.Resources.noir_cavalier));
 
-			/*pieces.Add(new Pawn(new Position(1, 1), true, Properties.Resources.noir_pion));
+			pieces.Add(new Pawn(new Position(1, 1), true, Properties.Resources.noir_pion));
 			pieces.Add(new Pawn(new Position(3, 1), true, Properties.Resources.noir_pion));
 			pieces.Add(new Pawn(new Position(5, 1), true, Properties.Resources.noir_pion));
 			pieces.Add(new Pawn(new Position(7, 1), true, Properties.Resources.noir_pion));
@@ -38,7 +38,7 @@ namespace ChessIA
 			pieces.Add(new Pawn(new Position(0, 2), true, Properties.Resources.noir_pion));
 			pieces.Add(new Pawn(new Position(2, 2), true, Properties.Resources.noir_pion));
 			pieces.Add(new Pawn(new Position(4, 2), true, Properties.Resources.noir_pion));
-			pieces.Add(new Pawn(new Position(6, 2), true, Properties.Resources.noir_pion));*/
+			pieces.Add(new Pawn(new Position(6, 2), true, Properties.Resources.noir_pion));
 
 
 			pieces.Add(new Rook(new Position(0, 7), false, Properties.Resources.blanc_tour));
@@ -46,15 +46,15 @@ namespace ChessIA
 			pieces.Add(new King(new Position(4, 7), false, Properties.Resources.blanc_roi));
 			pieces.Add(new Knight(new Position(6, 7), false, Properties.Resources.blanc_cavalier));
 
-			/*pieces.Add(new Pawn(new Position(1, 6), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(1, 3), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(3, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(5, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(7, 6), false, Properties.Resources.blanc_pion));
 
-			/*pieces.Add(new Pawn(new Position(0, 5), false, Properties.Resources.blanc_pion));
+			pieces.Add(new Pawn(new Position(0, 5), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(2, 5), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(4, 5), false, Properties.Resources.blanc_pion));
-			pieces.Add(new Pawn(new Position(6, 5), false, Properties.Resources.blanc_pion));*/
+			pieces.Add(new Pawn(new Position(6, 5), false, Properties.Resources.blanc_pion));
 
 			turn = false; // Tour des blancs au demarrage
 

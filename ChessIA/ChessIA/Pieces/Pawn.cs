@@ -29,168 +29,70 @@ namespace ChessIA
         }
         /*public override bool canMove(Position endPos, List<Piece> pieces)
         {
-            if (this.isBlack)
-            {
-                //On regarde si le déplacement est effectué dans le bon sens
-                if (endPos.getY() > this.getPos().getY())
-                {
-                    int offset = endPos.getY() - this.getPos().getY();
-
-                    switch (offset)
-                    {
-                        case 1:
-                            //check if not a diagonal move + no piece at endPos
-                            if (this.getPos().getX() == endPos.getX())
-                            {
-                                foreach (Piece piece in pieces)
-                                {
-                                    if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == endPos.getY())
-                                    {
-                                        return false;
-                                    }
-                                }
-                                return true;
-                            }
-                            //Diagonal move + check if ennemie
-                            else if (Math.Abs(endPos.getX() - this.getPos().getX()) == 1)
-                            {
-                                foreach (Piece piece in pieces)
-                                {
-                                    if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == endPos.getY() && !piece.getIsBlack())
-                                    {
-                                        return true;
-                                    }
-                                }
-                            }
-                            break;
-
-                        case 2:
-                            //check if first move and no diag
-                            if (this.isFirstMove && this.getPos().getX() == endPos.getX())
-                            {
-                                foreach (Piece piece in pieces)
-                                {
-                                    for (int i = this.getPos().getY() + 1; i <= endPos.getY(); i++)
-                                    {
-                                        if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == i)
-                                        {
-                                            return false;
-                                        }
-                                    }
-                                }
-                                return true;
-                            }
-                            break;
-
-                        default:
-                            return false;
-                    }
-                }
-                return false;
-            }
-            else
-            {
-                //On regarde si le déplacement est effectué dans le bon sens
-                if (endPos.getY() < this.getPos().getY())
-                {
-                    int offset = this.getPos().getY() - endPos.getY();
-
-                    switch (offset)
-                    {
-                        case 1:
-                            //check if not a diagonal move + no piece at endPos
-                            if (this.getPos().getX() == endPos.getX())
-                            {
-                                foreach (Piece piece in pieces)
-                                {
-                                    if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == endPos.getY())
-                                    {
-                                        return false;
-                                    }
-                                }
-                                return true;
-                            }
-                            //Diagonal move + check if ennemie
-                            else if (Math.Abs(endPos.getX() - this.getPos().getX()) == 1)
-                            {
-                                foreach (Piece piece in pieces)
-                                {
-                                    if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == endPos.getY() && piece.getIsBlack())
-                                    {
-                                        return true;
-                                    }
-                                }
-                            }
-                            break;
-
-                        case 2:
-                            //check if first move and no diag
-                            if (this.isFirstMove && this.getPos().getX() == endPos.getX())
-                            {
-                                foreach (Piece piece in pieces)
-                                {
-                                    for (int i = this.getPos().getY() - 1; i >= endPos.getY(); i--)
-                                    {
-                                        if (piece.getPos().getX() == endPos.getX() && piece.getPos().getY() == i)
-                                        {
-                                            return false;
-                                        }
-                                    }
-                                }
-                                return true;
-                            }
-                            break;
-
-                        default:
-                            return false;
-                    }
-                }
-                return false;
-            }
+            
         }*/
 		
 		public override void setPossibleMoves(List<Piece> pieces)
 		{
 			possibleMoves.Clear();
-			throw new NotImplementedException();
-			/*
-            List<Move> validMove = new List<Move>();
-            Position pos2Try;
-
-            if (this.getIsBlack())
-	        {
-                pos2Try = new Position(this.getPos().getX(), this.getPos().getY() + 1);
-                if (canMove(pos2Try, pieces))
-                {
-                    validMove.Add(new Move(pos2Try, 0));
-                }
-                if (this._isFirstMove)
-                {
-                    pos2Try = new Position(this.getPos().getX(), this.getPos().getY() + 2);
-                    if (canMove(pos2Try, pieces))
-                    {
-                        validMove.Add(new Move(pos2Try, 0));
-                    }
-                }
-            }
-            else
+            int j = 1;
+            if (this._isFirstMove)
             {
-                pos2Try = new Position(this.getPos().getX(), this.getPos().getY() - 1);
-                if (canMove(pos2Try, pieces))
+                j = 2;
+            }
+            //déplacement standard (vertical)
+            for (int i = 0; i < j; i++)
+            {
+                if (this.isBlack)
                 {
-                    validMove.Add(new Move(pos2Try, 0));
-                }
-                if (this._isFirstMove)
-                {
-                    pos2Try = new Position(this.getPos().getX(), this.getPos().getY() - 2);
-                    if (canMove(pos2Try, pieces))
+                    int x = this.getPos().getX();
+                    int y = this.getPos().getY() + (i + 1);
+                    if (this.isInChessboard(new Position(x, y)) && !collide(new Position(x, y), pieces))
                     {
-                        validMove.Add(new Move(pos2Try, 0));
+                        this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+                    }
+                    continue;
+                }
+                else
+                {
+                    int x = this.getPos().getX();
+                    int y = this.getPos().getY() - (i + 1);
+                    if (this.isInChessboard(new Position(x, y)) && !collide(new Position(x, y), pieces))
+                    {
+                        this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
                     }
                 }
             }
 
-            return validMove;*/
+            //déplacement horizontal
+            for (j = -1; j <= 1; j += 2)
+            {
+                for (int i = -1; i <= 1; i += 2)
+                {
+                    int x = this.getPos().getX() + i;
+                    int y = this.getPos().getY() + j;
+
+                    if ((j > 0 && !this.isBlack) || (j < 0 && this.isBlack))
+                        continue;
+    
+                    foreach (Piece piece in pieces)
+                    {
+                        if (piece.getPos().Equals(new Position(x, y)) && this.isBlack != piece.getIsBlack())
+                        {
+                            if (j < 0 && !this.isBlack)
+                            {
+                                this.possibleMoves.Add(new Move(new Position(x, y), getValue(piece)));
+                                break;
+                            }
+                            else if (j > 0 && this.isBlack)
+                            {
+                                this.possibleMoves.Add(new Move(new Position(x, y), getValue(piece)));
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
 		}
 	}
 }
