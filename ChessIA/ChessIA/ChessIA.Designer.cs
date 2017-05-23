@@ -31,13 +31,6 @@ namespace ChessIA
         private void InitializeComponent()
         {
 			this.chessboard = new System.Windows.Forms.TableLayoutPanel();
-			this.inputY1 = new System.Windows.Forms.NumericUpDown();
-			this.inputX1 = new System.Windows.Forms.NumericUpDown();
-			this.inputX2 = new System.Windows.Forms.NumericUpDown();
-			this.inputY2 = new System.Windows.Forms.NumericUpDown();
-			this.labelPosition1 = new System.Windows.Forms.Label();
-			this.labelPosition2 = new System.Windows.Forms.Label();
-			this.deplacementButton = new System.Windows.Forms.Button();
 			this.labelInfoTour = new System.Windows.Forms.Label();
 			this.labelTurn = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
@@ -58,14 +51,10 @@ namespace ChessIA
 			this.label13 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
-			this.labelError = new System.Windows.Forms.Label();
 			this.label17 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.listMoves = new System.Windows.Forms.ListBox();
-			((System.ComponentModel.ISupportInitialize)(this.inputY1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputX1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputX2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputY2)).BeginInit();
+			this.labelCheck = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
@@ -94,90 +83,6 @@ namespace ChessIA
 			this.chessboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
 			this.chessboard.Size = new System.Drawing.Size(500, 500);
 			this.chessboard.TabIndex = 0;
-			// 
-			// inputY1
-			// 
-			this.inputY1.Location = new System.Drawing.Point(138, 83);
-			this.inputY1.Maximum = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-			this.inputY1.Name = "inputY1";
-			this.inputY1.Size = new System.Drawing.Size(120, 20);
-			this.inputY1.TabIndex = 2;
-			this.inputY1.Click += new System.EventHandler(this.inputY1_Enter);
-			this.inputY1.Enter += new System.EventHandler(this.inputY1_Enter);
-			// 
-			// inputX1
-			// 
-			this.inputX1.Location = new System.Drawing.Point(12, 83);
-			this.inputX1.Maximum = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-			this.inputX1.Name = "inputX1";
-			this.inputX1.Size = new System.Drawing.Size(120, 20);
-			this.inputX1.TabIndex = 1;
-			this.inputX1.Click += new System.EventHandler(this.inputX1_Enter);
-			this.inputX1.Enter += new System.EventHandler(this.inputX1_Enter);
-			// 
-			// inputX2
-			// 
-			this.inputX2.Location = new System.Drawing.Point(12, 140);
-			this.inputX2.Maximum = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-			this.inputX2.Name = "inputX2";
-			this.inputX2.Size = new System.Drawing.Size(120, 20);
-			this.inputX2.TabIndex = 3;
-			this.inputX2.Click += new System.EventHandler(this.inputX2_Enter);
-			this.inputX2.Enter += new System.EventHandler(this.inputX2_Enter);
-			// 
-			// inputY2
-			// 
-			this.inputY2.Location = new System.Drawing.Point(138, 140);
-			this.inputY2.Maximum = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-			this.inputY2.Name = "inputY2";
-			this.inputY2.Size = new System.Drawing.Size(120, 20);
-			this.inputY2.TabIndex = 4;
-			this.inputY2.Click += new System.EventHandler(this.inputY2_Enter);
-			this.inputY2.Enter += new System.EventHandler(this.inputY2_Enter);
-			// 
-			// labelPosition1
-			// 
-			this.labelPosition1.AutoSize = true;
-			this.labelPosition1.Location = new System.Drawing.Point(12, 67);
-			this.labelPosition1.Name = "labelPosition1";
-			this.labelPosition1.Size = new System.Drawing.Size(79, 13);
-			this.labelPosition1.TabIndex = 5;
-			this.labelPosition1.Text = "Case de départ";
-			// 
-			// labelPosition2
-			// 
-			this.labelPosition2.AutoSize = true;
-			this.labelPosition2.Location = new System.Drawing.Point(12, 124);
-			this.labelPosition2.Name = "labelPosition2";
-			this.labelPosition2.Size = new System.Drawing.Size(74, 13);
-			this.labelPosition2.TabIndex = 6;
-			this.labelPosition2.Text = "Case d\'arrivée";
-			// 
-			// deplacementButton
-			// 
-			this.deplacementButton.Location = new System.Drawing.Point(12, 194);
-			this.deplacementButton.Name = "deplacementButton";
-			this.deplacementButton.Size = new System.Drawing.Size(246, 67);
-			this.deplacementButton.TabIndex = 7;
-			this.deplacementButton.Text = "Valider déplacement";
-			this.deplacementButton.UseVisualStyleBackColor = true;
-			this.deplacementButton.Click += new System.EventHandler(this.deplacementButton_Click);
 			// 
 			// labelInfoTour
 			// 
@@ -483,16 +388,6 @@ namespace ChessIA
 			this.label15.Text = "3";
 			this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// labelError
-			// 
-			this.labelError.AutoSize = true;
-			this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelError.ForeColor = System.Drawing.Color.DarkRed;
-			this.labelError.Location = new System.Drawing.Point(35, 353);
-			this.labelError.Name = "labelError";
-			this.labelError.Size = new System.Drawing.Size(0, 25);
-			this.labelError.TabIndex = 14;
-			// 
 			// label17
 			// 
 			this.label17.AutoSize = true;
@@ -525,34 +420,33 @@ namespace ChessIA
 			this.listMoves.Size = new System.Drawing.Size(154, 511);
 			this.listMoves.TabIndex = 19;
 			// 
+			// labelCheck
+			// 
+			this.labelCheck.AutoSize = true;
+			this.labelCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelCheck.ForeColor = System.Drawing.Color.DarkBlue;
+			this.labelCheck.Location = new System.Drawing.Point(28, 379);
+			this.labelCheck.Name = "labelCheck";
+			this.labelCheck.Size = new System.Drawing.Size(0, 31);
+			this.labelCheck.TabIndex = 20;
+			// 
 			// ChessIA
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1054, 569);
+			this.Controls.Add(this.labelCheck);
 			this.Controls.Add(this.listMoves);
 			this.Controls.Add(this.tableLayoutPanel3);
 			this.Controls.Add(this.label17);
-			this.Controls.Add(this.labelError);
 			this.Controls.Add(this.tableLayoutPanel2);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.labelTurn);
 			this.Controls.Add(this.labelInfoTour);
-			this.Controls.Add(this.deplacementButton);
-			this.Controls.Add(this.labelPosition2);
-			this.Controls.Add(this.labelPosition1);
-			this.Controls.Add(this.inputY2);
-			this.Controls.Add(this.inputX2);
-			this.Controls.Add(this.inputX1);
-			this.Controls.Add(this.inputY1);
 			this.Controls.Add(this.chessboard);
 			this.Name = "ChessIA";
 			this.Text = "ChessIA";
 			this.Load += new System.EventHandler(this.ChessIA_Load);
-			((System.ComponentModel.ISupportInitialize)(this.inputY1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputX1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputX2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputY2)).EndInit();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.tableLayoutPanel2.ResumeLayout(false);
@@ -564,14 +458,7 @@ namespace ChessIA
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel chessboard;
-		private System.Windows.Forms.NumericUpDown inputY1;
-		private System.Windows.Forms.NumericUpDown inputX1;
-		private System.Windows.Forms.NumericUpDown inputX2;
-		private System.Windows.Forms.NumericUpDown inputY2;
-		private System.Windows.Forms.Label labelPosition1;
-		private System.Windows.Forms.Label labelPosition2;
-		private System.Windows.Forms.Button deplacementButton;
+		private System.Windows.Forms.TableLayoutPanel chessboard;
 		private System.Windows.Forms.Label labelInfoTour;
 		private System.Windows.Forms.Label labelTurn;
 		private System.Windows.Forms.Label label5;
@@ -592,10 +479,10 @@ namespace ChessIA
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.Label labelError;
 		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.ListBox listMoves;
+		private System.Windows.Forms.Label labelCheck;
 	}
 }
 

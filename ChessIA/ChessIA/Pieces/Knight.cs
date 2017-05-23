@@ -16,33 +16,12 @@ namespace ChessIA
 
         }
 
-		/*public override bool canMove(Position endPos, List<Piece> pieces)
-        {
-            int dist = (endPos.getX() - this.getPos().getX()) * (endPos.getX() - this.getPos().getX()) + (endPos.getY() - this.getPos().getY()) * (endPos.getY() - this.getPos().getY());
-            if (dist == 5)
-            {
-
-                foreach (Piece piece in pieces)
-                {
-                    if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack != piece.getIsBlack())
-                    {
-                        return true;
-                    }
-                    if (endPos.getX() == piece.getPos().getX() && endPos.getY() == piece.getPos().getY() && this.isBlack == piece.getIsBlack())
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
-        }*/
-
 		public override void setPossibleMoves(List<Piece> pieces)
 		{
 			possibleMoves.Clear();
             List<Position> allPos = new List<Position>();
             int x, y;
+
 
             //On place toutes les positions possibles dans une liste
             for (int i = -2; i < 3; i++)
@@ -65,14 +44,14 @@ namespace ChessIA
 
             foreach (Position pos2Test in allPos)
             {
-                foreach (Piece piece in pieces)
-                {
-                    if (pos2Test.Equals(piece.getPos()) && piece.getIsBlack() != this.isBlack)
-                    {
-						this.possibleMoves.Add(new Move(pos2Test, getValue(piece)));
-                    }
-                }
-                this.possibleMoves.Add(new Move(pos2Test, VALUE_EMPTY));
+				if(collide(pos2Test, pieces))
+				{
+					foreach (Piece piece in pieces)
+						if (pos2Test.Equals(piece.getPos()) && piece.getIsBlack() != this.isBlack)
+							this.possibleMoves.Add(new Move(pos2Test, getValue(piece)));
+				}
+				else
+					this.possibleMoves.Add(new Move(pos2Test, VALUE_EMPTY));
             }
     	}
 	}
