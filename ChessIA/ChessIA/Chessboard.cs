@@ -65,6 +65,7 @@ namespace ChessIA
 			Piece piece = getPiece(startPos);
 			if (piece != null)
 			{
+
 				refresh();
 
 				if (piece.getIsBlack() != this.turn) // On s'assure que la couleur jouée est bien la bonne
