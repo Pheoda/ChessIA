@@ -424,7 +424,7 @@ namespace ChessIA
 			// 
 			this.labelCheck.AutoSize = true;
 			this.labelCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelCheck.ForeColor = System.Drawing.Color.DarkBlue;
+			this.labelCheck.ForeColor = System.Drawing.Color.Crimson;
 			this.labelCheck.Location = new System.Drawing.Point(28, 379);
 			this.labelCheck.Name = "labelCheck";
 			this.labelCheck.Size = new System.Drawing.Size(0, 31);

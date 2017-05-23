@@ -68,19 +68,29 @@ namespace ChessIA
 						labelTurn.Text = "Blanc";
 					board.refresh();
 
-					if (board.findKing(true).getInCheck(board.getPieces())) // TEST NOIR
+					if (board.findKing(true).getInCheck(board.getPieces())) // TEST ECHEC NOIR
 					{
-						labelCheck.Text = "NOIR  ";
+						labelCheck.Text = "NOIR en échec";
 					}
-					if (board.findKing(false).getInCheck(board.getPieces())) // TEST BLANC
+					if (board.findKing(false).getInCheck(board.getPieces())) // TEST ECHEC BLANC
 					{
-						labelCheck.Text += "BLANC";
+						labelCheck.Text += "BLANC en échec";
 					}
 					// Ajouter à la liste de coups les coordonnées x1;y1 -> x2;y2
 					listMoves.Items.Add("(" + startPos.getX() + ";" + startPos.getY() + ") -> (" + p.getX() + ";" + p.getY() + ")");
 					
 					// Réinitialisation
 					selected = false;
+
+					if(board.checkMate(board.findKing(board.getTurn())))
+					{
+						string text;
+						if (!board.getTurn()) // Affichage du vainqueur
+							text = "NOIR";
+						else
+							text = "BLANC";
+						MessageBox.Show(text + " gagne", "Fin de partie");
+					}
 				}
 				else if (pieceSelected != null && pieceSelected.getIsBlack() == board.getTurn()) // Sélection d'une autre pièce alors qu'on a déjà une pièce sélectionnée
 				{

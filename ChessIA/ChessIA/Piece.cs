@@ -16,7 +16,7 @@ namespace ChessIA
 		protected const double VALUE_KNIGHT = 3.2;
 		protected const double VALUE_BISHOP = 3.33;
 		protected const double VALUE_ROOK = 5.1;
-		protected const double VALUE_KING = 99999;
+		protected const double VALUE_KING = 500;
 
 		protected Position position;
 		protected bool isBlack;
@@ -64,7 +64,7 @@ namespace ChessIA
 			setPossibleMoves(pieces);
 			foreach (Move m in possibleMoves)
 			{
-				layoutPanel.GetControlFromPosition(m.getPosition().getX(), m.getPosition().getY()).BackColor = Color.SteelBlue;
+				layoutPanel.GetControlFromPosition(m.getPosition().getX(), m.getPosition().getY()).BackColor = Color.DodgerBlue;
 			}
 
 		}
