@@ -81,8 +81,9 @@ namespace ChessIA
 						// POUR TESTER FONCTION DE VALIDMOVES
 						Console.WriteLine("===== TEST =====");
 						foreach (Move m in piece.getPossibleMoves())
-							Console.WriteLine(m.getPosition().getX() + " | " + m.getPosition().getY() + " -> " + m.getValue());
-
+						{
+							layoutPanel.GetControlFromPosition(m.getPosition().getX(), m.getPosition().getY()).BackColor = Color.LawnGreen;
+						}
 
 						if (pieceMoved) // Déplacement valide
 						{
@@ -139,6 +140,13 @@ namespace ChessIA
 		}
         public void refresh()
         {
+			for (int x = 0; x < Chessboard.SIZE; x++)
+				for (int y = 0; y < Chessboard.SIZE; y++ )
+					if ((x + y) % 2 == 0)
+						layoutPanel.GetControlFromPosition(x, y).BackColor = Color.WhiteSmoke;
+					else
+						layoutPanel.GetControlFromPosition(x, y).BackColor = Color.Brown;
+
             foreach(Piece p in pieces)
 				layoutPanel.GetControlFromPosition(p.getPos().getX(), p.getPos().getY()).BackgroundImage = p.getImage();
         }

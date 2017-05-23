@@ -21,15 +21,11 @@ namespace ChessIA
 
         private void ChessIA_Load(object sender, EventArgs e)
         {
-			for (int x = 0; x < 8; x++)
-				for (int y = 0; y < 8; y++)
+			for (int x = 0; x < Chessboard.SIZE; x++)
+				for (int y = 0; y < Chessboard.SIZE; y++)
 				{
 					Panel p = new Panel();
 
-					if ((x + y) % 2 == 0)
-						p.BackColor = Color.WhiteSmoke;
-					else
-						p.BackColor = Color.Brown;
 					p.BackgroundImageLayout = ImageLayout.Stretch;
 					chessboard.Controls.Add(p, x, y);
 				}
