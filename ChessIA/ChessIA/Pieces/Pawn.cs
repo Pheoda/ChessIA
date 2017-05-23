@@ -43,20 +43,21 @@ namespace ChessIA
                 {
                     int x = this.getPos().getX();
                     int y = this.getPos().getY() + (i + 1);
-                    if (this.isInChessboard(new Position(x, y)) && !collide(new Position(x, y), pieces))
-                    {
-                        this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
-                    }
-                    continue;
+					if (this.isInChessboard(new Position(x, y)))
+						if (!collide(new Position(x, y), pieces))
+							this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+						else
+							break;
                 }
                 else
                 {
                     int x = this.getPos().getX();
                     int y = this.getPos().getY() - (i + 1);
-                    if (this.isInChessboard(new Position(x, y)) && !collide(new Position(x, y), pieces))
-                    {
-                        this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
-                    }
+					if (this.isInChessboard(new Position(x, y)))
+						if (!collide(new Position(x, y), pieces))
+							this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
+						else
+							break;
                 }
             }
 
