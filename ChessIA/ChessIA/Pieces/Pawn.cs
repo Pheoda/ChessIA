@@ -27,7 +27,7 @@ namespace ChessIA
                 isFirstMove = value;
             }
         }
-        public override bool canMove(Position endPos, List<Piece> pieces)
+        /*public override bool canMove(Position endPos, List<Piece> pieces)
         {
             if (this.isBlack)
             {
@@ -147,10 +147,13 @@ namespace ChessIA
                 }
                 return false;
             }
-        }
-
-		public override List<Move> setPossibleMoves(List<Piece> pieces)
+        }*/
+		
+		public override void setPossibleMoves(List<Piece> pieces)
 		{
+			possibleMoves.Clear();
+			throw new NotImplementedException();
+			/*
             List<Move> validMove = new List<Move>();
             Position pos2Try;
 
@@ -187,7 +190,7 @@ namespace ChessIA
                 }
             }
 
-            return validMove;
+            return validMove;*/
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace ChessIA
 
         }
 
-		public override bool canMove(Position endPos, List<Piece> pieces)
+		/*public override bool canMove(Position endPos, List<Piece> pieces)
         {
             int dist = (endPos.getX() - this.getPos().getX()) * (endPos.getX() - this.getPos().getX()) + (endPos.getY() - this.getPos().getY()) * (endPos.getY() - this.getPos().getY());
             if (dist == 5)
@@ -36,27 +36,30 @@ namespace ChessIA
                 return true;
             }
             return false;
-        }
+        }*/
 
-		public override List<Move> setPossibleMoves(List<Piece> pieces)
+		public override void setPossibleMoves(List<Piece> pieces)
 		{
-            List<Move> validMove = new List<Move>();
+			possibleMoves.Clear();
             List<Position> allPos = new List<Position>();
             int x, y;
 
             //On place toutes les positions possibles dans une liste
             for (int i = -2; i < 3; i++)
             {
-                for (int j = -2; i < 3; j++)
+                for (int j = -2; j < 3; j++)
                 {
-                    x = this.getPos().getX() + i;
-                    y = this.getPos().getY() + j;
+					x = this.getPos().getX() + i;
+					y = this.getPos().getY() + j;
 
-                    int dist = (x - this.getPos().getX()) * (x - this.getPos().getX()) + (y - this.getPos().getY()) * (y - this.getPos().getY());
-                    if (dist == 5)
-                    {
-                        allPos.Add(new Position(x, y));
-                    }
+					if (isInChessboard(new Position(x, y)))
+					{
+						int dist = (x - this.getPos().getX()) * (x - this.getPos().getX()) + (y - this.getPos().getY()) * (y - this.getPos().getY());
+						if (dist == 5)
+						{
+							allPos.Add(new Position(x, y));
+						}
+					}
                 }
             }
 
@@ -66,12 +69,11 @@ namespace ChessIA
                 {
                     if (pos2Test.Equals(piece.getPos()) && piece.getIsBlack() != this.isBlack)
                     {
-                        validMove.Add(new Move(pos2Test, getValue(piece)));
+						this.possibleMoves.Add(new Move(pos2Test, getValue(piece)));
                     }
                 }
-                validMove.Add(new Move(pos2Test, VALUE_EMPTY));
+                this.possibleMoves.Add(new Move(pos2Test, VALUE_EMPTY));
             }
-            return validMove;
     	}
 	}
 }

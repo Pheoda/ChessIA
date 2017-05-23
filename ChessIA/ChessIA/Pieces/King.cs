@@ -20,7 +20,7 @@ namespace ChessIA
 			inCheck = false;
         }
 
-		public override bool canMove(Position endPos, List<Piece> pieces)
+		/*public override bool canMove(Position endPos, List<Piece> pieces)
         {
             if (Math.Abs(this.getPos().getX() - endPos.getX()) < 2 && Math.Abs(this.getPos().getY() - endPos.getY()) < 2)
             {
@@ -38,7 +38,7 @@ namespace ChessIA
                 return true;
             }
             return false;
-        }
+        }*/
 
 		public bool _inCheck
 		{
@@ -52,15 +52,13 @@ namespace ChessIA
 			}
 		}
 
-		public override List<Move> setPossibleMoves(List<Piece> pieces)
+		public override void setPossibleMoves(List<Piece> pieces)
 		{
-            List<Move> validMove = new List<Move>();
+			possibleMoves.Clear();
 			int x, y;
 
             for (int i = -1; i < 2; i++)
-			{
 			    for (int j = -1; j < 2; j++)
-			    {
 					if (i != 0 || j != 0)
 					{
 						x = this.getPos().getX() + i;
@@ -69,21 +67,14 @@ namespace ChessIA
                         {
                             if (!(collide(new Position(x, y), pieces)))
                             {
-                                validMove.Add(new Move(new Position(x, y), VALUE_EMPTY));
+                                this.possibleMoves.Add(new Move(new Position(x, y), VALUE_EMPTY));
                                 continue;
                             }
                             foreach (Piece piece in pieces)
-                            {
                                 if (piece.getPos().Equals(new Position(x, y)) && this.isBlack != piece.getIsBlack())
-                                {
-                                    validMove.Add(new Move(new Position(x, y), getValue(piece)));
-                                }
-                            }
+                                    this.possibleMoves.Add(new Move(new Position(x, y), getValue(piece)));
                         }
 					}
-			    }
-			}
-            return validMove;
 		}
 	}
 }

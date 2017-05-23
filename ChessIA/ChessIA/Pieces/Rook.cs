@@ -16,7 +16,7 @@ namespace ChessIA
 
         }
 
-		public override bool canMove(Position endPos, List<Piece> pieces)
+		/*public override bool canMove(Position endPos, List<Piece> pieces)
         {		
             if (this.position.getX() == endPos.getX())
             {
@@ -67,11 +67,11 @@ namespace ChessIA
 
 			// Si la case est libre
             return true;
-        }
+        }*/
 
-		public override List<Move> setPossibleMoves(List<Piece> pieces)
+		public override void setPossibleMoves(List<Piece> pieces)
 		{
-			List<Move> validMoves = new List<Move>();
+			possibleMoves.Clear();
 			int xPiece = this.getPos().getX();
 			int yPiece = this.getPos().getY();
 
@@ -86,14 +86,14 @@ namespace ChessIA
 						if (p.getPos().getX() == xPiece && p.getPos().getY() == y)
 						{
 							if (p.getIsBlack() != this.isBlack)
-								validMoves.Add(new Move(new Position(xPiece, y), getValue(p)));
+								this.possibleMoves.Add(new Move(new Position(xPiece, y), getValue(p)));
 							break;
 						}
 					}
 					break; // On sort une fois qu'on a atteint une pièce
 				}
 				else
-					validMoves.Add(new Move(new Position(xPiece, y), VALUE_EMPTY));
+					this.possibleMoves.Add(new Move(new Position(xPiece, y), VALUE_EMPTY));
 			}
 			// SUD : y+
 			for (int y = yPiece + 1; y < Chessboard.SIZE; y++)
@@ -106,14 +106,14 @@ namespace ChessIA
 						if (p.getPos().getX() == xPiece && p.getPos().getY() == y)
 						{
 							if (p.getIsBlack() != this.isBlack)
-								validMoves.Add(new Move(new Position(xPiece, y), getValue(p)));
+								this.possibleMoves.Add(new Move(new Position(xPiece, y), getValue(p)));
 							break;
 						}
 					}
 					break; // On sort une fois qu'on a atteint une pièce
 				}
 				else
-					validMoves.Add(new Move(new Position(xPiece, y), VALUE_EMPTY));
+					this.possibleMoves.Add(new Move(new Position(xPiece, y), VALUE_EMPTY));
 			}
 
 			// OUEST : x-
@@ -127,14 +127,14 @@ namespace ChessIA
 						if (p.getPos().getX() == x && p.getPos().getY() == yPiece)
 						{
 							if (p.getIsBlack() != this.isBlack)
-								validMoves.Add(new Move(new Position(x, yPiece), getValue(p)));
+								this.possibleMoves.Add(new Move(new Position(x, yPiece), getValue(p)));
 							break;
 						}
 					}
 					break; // On sort une fois qu'on a atteint une pièce
 				}
 				else
-					validMoves.Add(new Move(new Position(x, yPiece), VALUE_EMPTY));
+					this.possibleMoves.Add(new Move(new Position(x, yPiece), VALUE_EMPTY));
 			}
 
 			// EST : x+
@@ -148,17 +148,15 @@ namespace ChessIA
 						if (p.getPos().getX() == x && p.getPos().getY() == yPiece)
 						{
 							if (p.getIsBlack() != this.isBlack)
-								validMoves.Add(new Move(new Position(x, yPiece), getValue(p)));
+								this.possibleMoves.Add(new Move(new Position(x, yPiece), getValue(p)));
 							break;
 						}
 					}
 					break; // On sort une fois qu'on a atteint une pièce
 				}
 				else
-					validMoves.Add(new Move(new Position(x, yPiece), VALUE_EMPTY));
+					this.possibleMoves.Add(new Move(new Position(x, yPiece), VALUE_EMPTY));
 			}
-
-			return validMoves;
 		}
 	}
 }

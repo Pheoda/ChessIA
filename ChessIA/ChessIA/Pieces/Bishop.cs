@@ -16,7 +16,7 @@ namespace ChessIA
 
         }
 
-		public override bool canMove(Position endPos, List<Piece> pieces)
+		/*public override bool canMove(Position endPos, List<Piece> pieces)
         {
 			if (Math.Abs(this.getPos().getX() - endPos.getX()) == Math.Abs(this.getPos().getY() - endPos.getY())) // Déplacement en diagonal uniquement
 			{
@@ -65,23 +65,97 @@ namespace ChessIA
 				// Case libre
 				return true;
 			}
-			else
-				return false; // Si déplacement pas diagonal
-        }
+        }*/
 
-		public override List<Move> setPossibleMoves(List<Piece> pieces)
+		public override void setPossibleMoves(List<Piece> pieces)
 		{
-            List<Move> validMove = new List<Move>();
-            Position pos2Try;
+			possibleMoves.Clear();
+			int x = position.getX(), y = position.getY();
 
-            for (int i = -1; i < Chessboard.SIZE; i++)
-            {
-                for (int j = 0; j < Chessboard.SIZE; j++)
-                {
-                    
-                }
-            }
-			throw new NotImplementedException();
+			// NORD OUEST -/-
+			for(int i = 1; isInChessboard(new Position(x - i, y - i)); i++)
+			{
+				if (collide(new Position(x - i, y - i), pieces))
+				{
+					// On regarde si on peut manger la pièce
+					foreach (Piece p in pieces)
+					{
+						if (p.getPos().getX() == (x - i) && p.getPos().getY() == (y - i))
+						{
+							if (p.getIsBlack() != this.isBlack)
+								this.possibleMoves.Add(new Move(new Position(x - i, y - i), getValue(p)));
+							break;
+						}
+					}
+					break; // On sort une fois qu'on a atteint une pièce
+				}
+				else
+					this.possibleMoves.Add(new Move(new Position(x - i, y - i), VALUE_EMPTY));
+			}
+
+
+			// NORD EST +/-
+			for (int i = 1; isInChessboard(new Position(x + i, y - i)); i++)
+			{
+				if (collide(new Position(x + i, y - i), pieces))
+				{
+					// On regarde si on peut manger la pièce
+					foreach (Piece p in pieces)
+					{
+						if (p.getPos().getX() == (x + i) && p.getPos().getY() == (y - i))
+						{
+							if (p.getIsBlack() != this.isBlack)
+								this.possibleMoves.Add(new Move(new Position(x + i, y - i), getValue(p)));
+							break;
+						}
+					}
+					break; // On sort une fois qu'on a atteint une pièce
+				}
+				else
+					this.possibleMoves.Add(new Move(new Position(x + i, y - i), VALUE_EMPTY));
+			}
+
+			// SUD OUEST -/+
+			for (int i = 1; isInChessboard(new Position(x - i, y + i)); i++)
+			{
+				if (collide(new Position(x - i, y + i), pieces))
+				{
+					// On regarde si on peut manger la pièce
+					foreach (Piece p in pieces)
+					{
+						if (p.getPos().getX() == (x - i) && p.getPos().getY() == (y + i))
+						{
+							if (p.getIsBlack() != this.isBlack)
+								this.possibleMoves.Add(new Move(new Position(x - i, y + i), getValue(p)));
+							break;
+						}
+					}
+					break; // On sort une fois qu'on a atteint une pièce
+				}
+				else
+					this.possibleMoves.Add(new Move(new Position(x - i, y + i), VALUE_EMPTY));
+			}
+
+			// SUD EST +/+
+			for (int i = 1; isInChessboard(new Position(x + i, y + i)); i++)
+			{
+				if (collide(new Position(x + i, y + i), pieces))
+				{
+					// On regarde si on peut manger la pièce
+					foreach (Piece p in pieces)
+					{
+						if (p.getPos().getX() == (x + i) && p.getPos().getY() == (y + i))
+						{
+							if (p.getIsBlack() != this.isBlack)
+								this.possibleMoves.Add(new Move(new Position(x + i, y + i), getValue(p)));
+							break;
+						}
+					}
+					break; // On sort une fois qu'on a atteint une pièce
+				}
+				else
+					this.possibleMoves.Add(new Move(new Position(x + i, y + i), VALUE_EMPTY));
+			}
 		}
 	}
 }

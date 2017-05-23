@@ -46,7 +46,7 @@ namespace ChessIA
 			pieces.Add(new King(new Position(4, 7), false, Properties.Resources.blanc_roi));
 			pieces.Add(new Knight(new Position(6, 7), false, Properties.Resources.blanc_cavalier));
 
-			pieces.Add(new Pawn(new Position(1, 6), false, Properties.Resources.blanc_pion));
+			/*pieces.Add(new Pawn(new Position(1, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(3, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(5, 6), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(7, 6), false, Properties.Resources.blanc_pion));
@@ -75,17 +75,14 @@ namespace ChessIA
 					}
 					else // Si le déplacement est correct, on déplace ou on mange la pièce ciblée
 					{
-						// POUR TESTER FONCTION DE VALIDMOVES
-						if (piece.GetType() == typeof(Pawn))
-						{
-							Console.WriteLine("===== TEST =====");
-							List<Move> moves = new List<Move>();
-							moves = piece.possibleMoves(pieces);
-							foreach (Move m in moves)
-								Console.WriteLine(m.getPosition().getX() + " | " + m.getPosition().getY() + " -> " + m.getValue());
-						}
-
 						bool pieceMoved = piece.canMove(endPos, this.pieces);
+
+
+						// POUR TESTER FONCTION DE VALIDMOVES
+						Console.WriteLine("===== TEST =====");
+						foreach (Move m in piece.getPossibleMoves())
+							Console.WriteLine(m.getPosition().getX() + " | " + m.getPosition().getY() + " -> " + m.getValue());
+
 
 						if (pieceMoved) // Déplacement valide
 						{

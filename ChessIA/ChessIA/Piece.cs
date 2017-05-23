@@ -32,11 +32,27 @@ namespace ChessIA
 			this.possibleMoves = new List<Move>();
 		}
 
-		// Bouge la piece a la position pos en effectuant les tests necessaires
-		public abstract bool canMove(Position endPos, List<Piece> pieces);
+		//public abstract bool canMove(Position endPos, List<Piece> pieces);
+
+		// Renvoie si la pièce peut se déplacer à la position donnée
+		public bool canMove(Position endPos, List<Piece> pieces)
+		{
+			setPossibleMoves(pieces); // MAJ de la liste des mouvements possibles
+
+			foreach (Move m in this.possibleMoves)
+				if (m.getPosition().getX() == endPos.getX() && m.getPosition().getY() == endPos.getY())
+					return true;
+
+			return false;
+		}
 
         // Calcul tous les coups possibles de la pièce
-        public abstract List<Move> setPossibleMoves(List<Piece> pieces);
+        public abstract void setPossibleMoves(List<Piece> pieces);
+
+		public List<Move> getPossibleMoves()
+		{
+			return possibleMoves;
+		}
 
 		public bool getIsBlack()
 		{
@@ -53,6 +69,11 @@ namespace ChessIA
 		public Image getImage()
 		{
 			return this.image;
+		}
+
+		protected bool isInChessboard(Position pos)
+		{
+			return (pos.getX() >= 0) && (pos.getY() >= 0) && (pos.getX() < Chessboard.SIZE) && (pos.getY() < Chessboard.SIZE);
 		}
 
 		protected bool collide(Position pos, List<Piece> pieces) // Retourne s'il y a une pièce sur cette position
