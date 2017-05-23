@@ -63,7 +63,7 @@ namespace ChessIA
 					{
 						x = this.getPos().getX() + i;
 						y = this.getPos().getY() + j;
-                        if (x >= 0 && y >= 0 && x < Chessboard.SIZE && y < Chessboard.SIZE)
+                        if (isInChessboard(new Position(x, y)))
                         {
                             if (!(collide(new Position(x, y), pieces)))
                             {

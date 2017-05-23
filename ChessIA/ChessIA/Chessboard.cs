@@ -56,7 +56,7 @@ namespace ChessIA
 			pieces.Add(new Pawn(new Position(4, 5), false, Properties.Resources.blanc_pion));
 			pieces.Add(new Pawn(new Position(6, 5), false, Properties.Resources.blanc_pion));*/
 
-			turn = false; // Tour des blancs au demarrage
+			turn = false; // Tour des blancs au démarrage
 
 			refresh();
         }
@@ -68,8 +68,18 @@ namespace ChessIA
 			{
 				if (piece.getPos().getX() == startPos.getX() && piece.getPos().getY() == startPos.getY())
 				{
+					refresh();
+					// POUR TESTER FONCTION DE VALIDMOVES
+					Console.WriteLine("===== TEST =====");
+					piece.setPossibleMoves(pieces);
+					foreach (Move m in piece.getPossibleMoves())
+					{
+						layoutPanel.GetControlFromPosition(m.getPosition().getX(), m.getPosition().getY()).BackColor = Color.LawnGreen;
+					}
+
 					if (piece.getIsBlack() != this.turn) // On s'assure que la couleur jouée est bien la bonne
 					{
+						refresh();
 						this.errorLabel.Text = "Mauvaise couleur sélectionnée !";
 						return false;
 					}
@@ -77,13 +87,12 @@ namespace ChessIA
 					{
 						bool pieceMoved = piece.canMove(endPos, this.pieces);
 
-
 						// POUR TESTER FONCTION DE VALIDMOVES
-						Console.WriteLine("===== TEST =====");
+						/*Console.WriteLine("===== TEST =====");
 						foreach (Move m in piece.getPossibleMoves())
 						{
 							layoutPanel.GetControlFromPosition(m.getPosition().getX(), m.getPosition().getY()).BackColor = Color.LawnGreen;
-						}
+						}*/
 
 						if (pieceMoved) // Déplacement valide
 						{
@@ -113,7 +122,9 @@ namespace ChessIA
 							piece.setPos(endPos);
 						}
 						else
+						{
 							this.errorLabel.Text = "Déplacement invalide";
+						}
 
 						return pieceMoved;
 					}
