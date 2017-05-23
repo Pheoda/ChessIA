@@ -103,7 +103,7 @@ namespace ChessIA
 
 						// On déplace la pièce à la position finale
 						piece.setPos(endPos);
-						updatePossibleMoves(pieces); // MAJ des mouvements possibles
+						updatePossibleMoves(); // MAJ des mouvements possibles
 					}
 
 					return pieceMoved;
@@ -136,7 +136,7 @@ namespace ChessIA
             // On déplace la pièce à la position finale
             piece.setPos(move.getPosition());
             Console.WriteLine("UPDATE");
-            updatePossibleMoves(pieces); // MAJ des mouvements possibles
+            updatePossibleMoves(); // MAJ des mouvements possibles
             Console.WriteLine("FIN UPDATE");
         }
 
@@ -190,7 +190,12 @@ namespace ChessIA
 			return null;
 		}
 
-		public void updatePossibleMoves(List<Piece> pieces)
+		public bool checkMate(King k)
+		{
+			return k.getInCheck(pieces) && k.getPossibleMoves().Count == 0; // Le roi est en échec et ne peut pas effectuer de déplacement
+		}
+
+		public void updatePossibleMoves()
 		{
 			foreach(Piece p in pieces)
 				p.setPossibleMoves(pieces);
@@ -204,7 +209,7 @@ namespace ChessIA
                     if ((x + y) % 2 == 0)
                         layoutPanel.GetControlFromPosition(x, y).BackColor = Color.WhiteSmoke;
                     else
-                        layoutPanel.GetControlFromPosition(x, y).BackColor = Color.Brown;
+                        layoutPanel.GetControlFromPosition(x, y).BackColor = Color.DarkGray;
 
                     layoutPanel.GetControlFromPosition(x, y).BackgroundImage = null;
                 }

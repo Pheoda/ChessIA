@@ -102,6 +102,6 @@ namespace ChessIA
                         pieceSelected.displayPossibleMoves(board.getPieces(), chessboard);
                     }
                 }
-		}
+        }
 	}
 }
