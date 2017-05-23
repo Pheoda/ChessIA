@@ -58,7 +58,6 @@ namespace ChessIA
 			this.label13 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
-			this.labelError = new System.Windows.Forms.Label();
 			this.label17 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.listMoves = new System.Windows.Forms.ListBox();
@@ -484,16 +483,6 @@ namespace ChessIA
 			this.label15.Text = "3";
 			this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// labelError
-			// 
-			this.labelError.AutoSize = true;
-			this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelError.ForeColor = System.Drawing.Color.DarkRed;
-			this.labelError.Location = new System.Drawing.Point(35, 353);
-			this.labelError.Name = "labelError";
-			this.labelError.Size = new System.Drawing.Size(0, 25);
-			this.labelError.TabIndex = 14;
-			// 
 			// label17
 			// 
 			this.label17.AutoSize = true;
@@ -531,7 +520,7 @@ namespace ChessIA
 			this.labelCheck.AutoSize = true;
 			this.labelCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelCheck.ForeColor = System.Drawing.Color.DarkBlue;
-			this.labelCheck.Location = new System.Drawing.Point(26, 477);
+			this.labelCheck.Location = new System.Drawing.Point(28, 379);
 			this.labelCheck.Name = "labelCheck";
 			this.labelCheck.Size = new System.Drawing.Size(0, 31);
 			this.labelCheck.TabIndex = 20;
@@ -545,7 +534,6 @@ namespace ChessIA
 			this.Controls.Add(this.listMoves);
 			this.Controls.Add(this.tableLayoutPanel3);
 			this.Controls.Add(this.label17);
-			this.Controls.Add(this.labelError);
 			this.Controls.Add(this.tableLayoutPanel2);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.labelTurn);
@@ -604,7 +592,6 @@ namespace ChessIA
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.Label labelError;
 		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.ListBox listMoves;

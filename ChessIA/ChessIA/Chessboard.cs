@@ -15,14 +15,12 @@ namespace ChessIA
 		private List<Piece> pieces;
 		private bool turn;
         private TableLayoutPanel layoutPanel;
-		private Label errorLabel;
 
 		public static int SIZE = 8;
 		
-        public Chessboard(TableLayoutPanel panel, Label label)
+        public Chessboard(TableLayoutPanel panel)
         {
             layoutPanel = panel;
-			errorLabel = label;
 
 			pieces = new List<Piece>();
 			pieces.Add(new Rook(new Position(0, 0), true, Properties.Resources.noir_tour));
@@ -64,72 +62,50 @@ namespace ChessIA
 		// Bouge la piece si possible suivant la saisie clavier precedente
 		public bool movePiece(Position startPos, Position endPos)
 		{
-			foreach (Piece piece in pieces)
+			Piece piece = getPiece(startPos);
+			if (piece != null)
 			{
-				if (piece.getPos().getX() == startPos.getX() && piece.getPos().getY() == startPos.getY())
+				refresh();
+
+				if (piece.getIsBlack() != this.turn) // On s'assure que la couleur jouée est bien la bonne
 				{
 					refresh();
-					// POUR TESTER FONCTION DE VALIDMOVES
-					piece.setPossibleMoves(pieces);
-					foreach (Move m in piece.getPossibleMoves())
+					return false;
+				}
+				else // Si le déplacement est correct, on déplace ou on mange la pièce ciblée
+				{
+					bool pieceMoved = piece.canMove(endPos, this.pieces);
+
+					if (pieceMoved) // Déplacement valide
 					{
-						layoutPanel.GetControlFromPosition(m.getPosition().getX(), m.getPosition().getY()).BackColor = Color.LawnGreen;
-					}
-
-					if (piece.getIsBlack() != this.turn) // On s'assure que la couleur jouée est bien la bonne
-					{
-						refresh();
-						this.errorLabel.Text = "Mauvaise couleur sélectionnée !";
-						return false;
-					}
-					else // Si le déplacement est correct, on déplace ou on mange la pièce ciblée
-					{
-						bool pieceMoved = piece.canMove(endPos, this.pieces);
-
-						// POUR TESTER FONCTION DE VALIDMOVES
-						/*Console.WriteLine("===== TEST =====");
-						foreach (Move m in piece.getPossibleMoves())
+						Piece needDelete = null;
+						if (piece.GetType() == typeof(Pawn))
 						{
-							layoutPanel.GetControlFromPosition(m.getPosition().getX(), m.getPosition().getY()).BackColor = Color.LawnGreen;
-						}*/
-
-						if (pieceMoved) // Déplacement valide
-						{
-							Piece needDelete = null;
-							this.errorLabel.Text = "";
-							if (piece.GetType() == typeof(Pawn))
-							{
-								Pawn pawn = (Pawn)piece;
-								pawn._isFirstMove = false;
-							}
-
-							// Vérification s'il s'agit d'une prise de pièce
-							foreach (Piece p in pieces)
-							{
-								if (p.getPos().getX() == endPos.getX() && p.getPos().getY() == endPos.getY()) // On mange
-								{
-									needDelete = p;
-								}
-							}
-							if (needDelete != null) // Si on a mangé une pièce, on la supprime de la liste
-								pieces.Remove(needDelete);
-
-							// Suppression sprite sur l'ancienne case
-							layoutPanel.GetControlFromPosition(piece.getPos().getX(), piece.getPos().getY()).BackgroundImage = null;
-
-							// On déplace la pièce à la position finale
-							piece.setPos(endPos);
-						}
-						else
-						{
-							this.errorLabel.Text = "Déplacement invalide";
+							Pawn pawn = (Pawn)piece;
+							pawn._isFirstMove = false;
 						}
 
-						return pieceMoved;
+						// Vérification s'il s'agit d'une prise de pièce
+						foreach (Piece p in pieces)
+						{
+							if (p.getPos().getX() == endPos.getX() && p.getPos().getY() == endPos.getY()) // On mange
+							{
+								needDelete = p;
+							}
+						}
+						if (needDelete != null) // Si on a mangé une pièce, on la supprime de la liste
+							pieces.Remove(needDelete);
+
+						// Suppression sprite sur l'ancienne case
+						layoutPanel.GetControlFromPosition(piece.getPos().getX(), piece.getPos().getY()).BackgroundImage = null;
+
+						// On déplace la pièce à la position finale
+						piece.setPos(endPos);
 					}
+
+					return pieceMoved;
 				}
 			}
-			this.errorLabel.Text = "Pièce non trouvée";
 			return false;
 		}
 
@@ -145,6 +121,15 @@ namespace ChessIA
 		public List<Piece> getPieces()
 		{
 			return pieces;
+		}
+
+		// Une pièce est-elle sur la case ?
+		public Piece getPiece(Position p)
+		{
+			foreach (Piece piece in pieces)
+				if (piece.getPos().getX().Equals(p.getX()) && piece.getPos().getY().Equals(p.getY()))
+					return piece;
+			return null;
 		}
 
 		public King findKing(bool isBlack)

@@ -59,6 +59,16 @@ namespace ChessIA
 			return possibleMoves;
 		}
 
+		public void displayPossibleMoves(List<Piece> pieces, TableLayoutPanel layoutPanel)
+		{
+			setPossibleMoves(pieces);
+			foreach (Move m in possibleMoves)
+			{
+				layoutPanel.GetControlFromPosition(m.getPosition().getX(), m.getPosition().getY()).BackColor = Color.LawnGreen;
+			}
+
+		}
+
 		public bool getIsBlack()
 		{
 			return isBlack;

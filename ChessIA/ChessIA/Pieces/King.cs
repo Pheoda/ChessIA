@@ -65,12 +65,8 @@ namespace ChessIA
 			for(int i = 0; i < possibleMoves.Count; i++)
 			{
 				this.setPos(possibleMoves[i].getPosition());
-				Console.WriteLine("New pos : " + getPos().getX() + "/" + getPos().getY());
 				if (this.getInCheck(pieces))
-				{
-					Console.WriteLine("^-POSITION ECHEC");
 					possibleMoves.Remove(possibleMoves[i]);
-				}
 			}
 			this.setPos(new Position(x, y));
 		}
