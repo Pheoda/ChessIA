@@ -45,10 +45,12 @@ namespace ChessIA
 			x2 = (int)inputX2.Value;
 			y2 = (int)inputY2.Value;
 
-			Console.WriteLine("Entree : {0}/{1} et {2}/{3}", x1, y1, x2, y2);
+			//Console.WriteLine("Entree : {0}/{1} et {2}/{3}", x1, y1, x2, y2);
 
 			if (board.movePiece(new Position(x1, y1), new Position(x2, y2))) // Mouvement possible
 			{
+				labelCheck.Text = "Echec : ";
+
 				board.changeTurn();
 				if (board.getTurn()) // Tour noir
 					labelTurn.Text = "Noir";
@@ -56,6 +58,14 @@ namespace ChessIA
 					labelTurn.Text = "Blanc";
 				board.refresh();
 
+				if(board.findKing(true).getInCheck(board.getPieces())) // TEST NOIR
+				{
+					labelCheck.Text = "NOIR  ";
+				}
+				if (board.findKing(false).getInCheck(board.getPieces())) // TEST BLANC
+				{
+					labelCheck.Text += "BLANC";
+				}
 				// Ajouter à la liste de coups les coordonnées x1;y1 -> x2;y2
 				listMoves.Items.Add("(" + x1 + ";" + y1 + ") -> (" + x2 + ";" + y2 + ")");
 			}

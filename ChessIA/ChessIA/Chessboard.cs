@@ -70,7 +70,6 @@ namespace ChessIA
 				{
 					refresh();
 					// POUR TESTER FONCTION DE VALIDMOVES
-					Console.WriteLine("===== TEST =====");
 					piece.setPossibleMoves(pieces);
 					foreach (Move m in piece.getPossibleMoves())
 					{
@@ -133,14 +132,7 @@ namespace ChessIA
 			this.errorLabel.Text = "Pièce non trouvée";
 			return false;
 		}
-		public void kingInCheck()
-		{
-			// Pour pièce, on regarde si la valeur du roi est détectée dans les mouvements possibles
-			foreach(Piece piece in pieces)
-			{
-				
-			}
-		}
+
 		public void changeTurn()
 		{
 			this.turn = !this.turn;
@@ -149,6 +141,23 @@ namespace ChessIA
 		{
 			return this.turn;
 		}
+
+		public List<Piece> getPieces()
+		{
+			return pieces;
+		}
+
+		public King findKing(bool isBlack)
+		{
+			foreach(Piece p in pieces)
+			{
+				if (p.GetType() == typeof(King))
+					if (p.getIsBlack() == isBlack) // Même couleur que demandé
+						return (King)p;
+			}
+			return null;
+		}
+
         public void refresh()
         {
 			for (int x = 0; x < Chessboard.SIZE; x++)

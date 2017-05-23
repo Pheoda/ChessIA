@@ -62,6 +62,7 @@ namespace ChessIA
 			this.label17 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.listMoves = new System.Windows.Forms.ListBox();
+			this.labelCheck = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.inputY1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputX1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputX2)).BeginInit();
@@ -525,11 +526,22 @@ namespace ChessIA
 			this.listMoves.Size = new System.Drawing.Size(154, 511);
 			this.listMoves.TabIndex = 19;
 			// 
+			// labelCheck
+			// 
+			this.labelCheck.AutoSize = true;
+			this.labelCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelCheck.ForeColor = System.Drawing.Color.DarkBlue;
+			this.labelCheck.Location = new System.Drawing.Point(26, 477);
+			this.labelCheck.Name = "labelCheck";
+			this.labelCheck.Size = new System.Drawing.Size(0, 31);
+			this.labelCheck.TabIndex = 20;
+			// 
 			// ChessIA
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1054, 569);
+			this.Controls.Add(this.labelCheck);
 			this.Controls.Add(this.listMoves);
 			this.Controls.Add(this.tableLayoutPanel3);
 			this.Controls.Add(this.label17);
@@ -596,6 +608,7 @@ namespace ChessIA
 		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.ListBox listMoves;
+		private System.Windows.Forms.Label labelCheck;
 	}
 }
 
