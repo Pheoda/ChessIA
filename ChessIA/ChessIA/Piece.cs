@@ -99,7 +99,7 @@ namespace ChessIA
 			return false;
 		}
 		
-		protected double getValue(Piece p)
+		public double getValue(Piece p)
 		{
 			if (p.GetType() == typeof(Pawn))
 				return VALUE_PAWN;
