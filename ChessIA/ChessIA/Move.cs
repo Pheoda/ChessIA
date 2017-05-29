@@ -25,5 +25,10 @@ namespace ChessIA
 		{
 			return value;
 		}
+        public double setValue(double value)
+        {
+            this.value = value;
+            return this.value;
+        }
     }
 }

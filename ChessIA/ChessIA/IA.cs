@@ -10,6 +10,7 @@ namespace ChessIA
     {
         private Piece piece;
         private Move node;
+
         public Piece Piece 
         {
             get
@@ -17,6 +18,7 @@ namespace ChessIA
                 return this.piece;
             }
         }
+
         public Move Node 
         {
             get
@@ -24,9 +26,10 @@ namespace ChessIA
                 return this.node;
             }
         }
+
         public void play(List<Piece> pieces, int depth)
         {
-            double max = -10000;
+            double bestValue = -10000;
 
             foreach (Piece p in pieces)
             {
@@ -34,15 +37,14 @@ namespace ChessIA
                 {
                     foreach (Move node in p.getPossibleMoves())
                     {
-                        double value = minMax(node, p, pieces, depth, true) - node.getValue();
-                        Console.WriteLine("Value : " + value);
-                        if (value >= max)
+                        double value = max(node, p, pieces, depth);
+                      
+                        if (value >= bestValue)
                         {
-                            max = value;
+                            bestValue = value;
                             this.node = node;
                             this.piece = p;
                         }
-                        Console.WriteLine("fin max" + max);
                     }
                 }
             }
@@ -54,74 +56,71 @@ namespace ChessIA
                 Console.WriteLine("Pos : " + pieces[i].getPos().getX() + "/" + pieces[i].getPos().getY());
 
         }
-        public double minMax(Move node, Piece p, List<Piece> pieces, int depth, bool black)
+
+        private double min(Move node, Piece p, List<Piece> pieces, int depth)
         {
-           // Piece oldPiece = p;
-            //p.setPos(node.getPosition());
+            if (depth == 0)
+            {
+                return node.getValue();
+            }
+            double bestValue = 10000;
 
+            foreach (Piece pieceOppo in pieces)
+            {
+                if (!pieceOppo.getIsBlack())
+                {
+                    foreach (Move nodeChild in p.getPossibleMoves())
+                    {
+                        Position oldPosOppo = pieceOppo.getPos();
+                        pieceOppo.setPos(nodeChild.getPosition());
+                        
+                        double value = max(nodeChild, pieceOppo, pieces, depth - 1) + nodeChild.getValue();
 
-            if (depth == 0) //or Last node
+                        if (value < bestValue)
+                        {
+                            bestValue = value;
+                        }
+
+                        pieceOppo.setPos(oldPosOppo);
+                    }
+                }
+            }
+
+            return bestValue;
+            //return bestValue < value ? bestValue : value;
+        }
+
+        private double max(Move node, Piece p, List<Piece> pieces, int depth)
+        {
+            if (depth == 0)
             {
                 return node.getValue();
             }
 
-            if (black)
+            double bestValue = -10000;
+
+            foreach (Piece pieceAI in pieces)
             {
-                double bestValue = 10000;
-
-                foreach (Piece pieceOppo in pieces)
+                if (pieceAI.getIsBlack())
                 {
-                    if (!pieceOppo.getIsBlack())
+                    foreach (Move nodeChild in p.getPossibleMoves())
                     {
-                        foreach (Move nodeChild in p.getPossibleMoves())
+                        Position oldPosAI = pieceAI.getPos();
+                        pieceAI.setPos(nodeChild.getPosition());
+
+                        double value = min(nodeChild, pieceAI, pieces, depth - 1) + nodeChild.getValue();
+
+                        if (value > bestValue)
                         {
-                           Position oldPosOppo = pieceOppo.getPos();
-                           pieceOppo.setPos(nodeChild.getPosition());
-
-                            double value = minMax(nodeChild, pieceOppo, pieces, depth - 1, false) + node.getValue();
-                            bestValue = min(bestValue, value);
-                            //Console.WriteLine("min : " + bestValue  + "tour" + depth);
-                            //Console.WriteLine("white : " + oldPosOppo.getX() + ", " + oldPosOppo.getY());
-
-                            pieceOppo.setPos(oldPosOppo);
+                            bestValue = value;
                         }
+
+                        pieceAI.setPos(oldPosAI);
                     }
                 }
-               
-                return bestValue;
             }
-            else
-            {
-                double bestValue = -10000;
-                foreach (Piece pieceAI in pieces)
-                {
-                    if (pieceAI.getIsBlack())
-                    {
-                        foreach (Move nodeChild in p.getPossibleMoves())
-                        {
-                            Position oldPosAI = pieceAI.getPos();
-                            pieceAI.setPos(nodeChild.getPosition());
-
-                            double value = minMax(nodeChild, pieceAI, pieces, depth - 1, true) - node.getValue();
-                            //Console.WriteLine("black : " + oldPosAI.getX() + ", " + oldPosAI.getY());
-                            bestValue = max(bestValue, value);
-                           // Console.WriteLine("max : " + bestValue + "tour" + depth);
-                            pieceAI.setPos(oldPosAI);
-                        }
-                    }
-                }
-                return bestValue;
-            }
-        }
-
-        private double min(double bestValue, double value)
-        {
-            return bestValue < value ? bestValue : value;
-        }
-
-        private double max(double bestValue, double value)
-        {
-            return bestValue > value ? bestValue : value;
+            return bestValue;
+            //return bestValue > value ? bestValue : value;
         }
     }
 }
