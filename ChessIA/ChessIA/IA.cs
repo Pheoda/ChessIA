@@ -69,12 +69,12 @@ namespace ChessIA
             {
                 if (!pieceOppo.getIsBlack())
                 {
-                    foreach (Move nodeChild in p.getPossibleMoves())
+                    foreach (Move nodeChild in pieceOppo.getPossibleMoves())
                     {
                         Position oldPosOppo = pieceOppo.getPos();
                         pieceOppo.setPos(nodeChild.getPosition());
                         
-                        double value = max(nodeChild, pieceOppo, pieces, depth - 1) + nodeChild.getValue();
+                        double value = max(nodeChild, pieceOppo, pieces, depth - 1) + node.getValue();
 
                         if (value < bestValue)
                         {
@@ -103,12 +103,12 @@ namespace ChessIA
             {
                 if (pieceAI.getIsBlack())
                 {
-                    foreach (Move nodeChild in p.getPossibleMoves())
+                    foreach (Move nodeChild in pieceAI.getPossibleMoves())
                     {
                         Position oldPosAI = pieceAI.getPos();
                         pieceAI.setPos(nodeChild.getPosition());
 
-                        double value = min(nodeChild, pieceAI, pieces, depth - 1) + nodeChild.getValue();
+                        double value = min(nodeChild, pieceAI, pieces, depth - 1) + node.getValue();
 
                         if (value > bestValue)
                         {
